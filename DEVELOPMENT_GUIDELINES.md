@@ -36,7 +36,7 @@ One of the goals this library aims to achieve is to be available for general use
 
 ## Writing utility classes
 
-Every utility class **must _cover one and only one topic_**. [This](%5Bhttps://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java%5D(https://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java) is a bad example of a utility class - it covers multiple topics (JSON (de)serialization, ID generation, Date formatting).
+Every utility class **must _cover one and only one topic_**. [This](https://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java) is a bad example of a utility class - it covers multiple topics (JSON (de)serialization, ID generation, Date formatting).
 
 The linked class is also a bad example of utility class naming, as we don't learn much about the functionality of the class from the name alone. If, for instance, a class deals with String manipulation, a good practice would be to name the class `Strings.java`, `StringUtil.java`, `StringUtils.java` or even `StringUtilities.java`.
 
