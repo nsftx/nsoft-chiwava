@@ -1,27 +1,20 @@
-#### Table of contents
+# Table of contents
 
--   [Overview](#overview)
-    
--   [Project structure](#project-structure)
-    
-    -   [Module naming](#module-naming)
-        
-    -   [Module versioning](#module-versioning)
-        
-    -   [Open-sourcing](#open-sourcing)
-        
--   [Writing utility classes](#writing-utility-classes)
-    
--   [Library documentation](#library-documentation)
-    
+* [Overview](#overview)
+* [Project structure](#project-structure)
+  * [Module naming](#module-naming)
+  * [Module versioning](#module-versioning)
+  * [Open-sourcing](#open-sourcing)
+* [Writing utility classes](#writing-utility-classes)
+* [Library documentation](#library-documentation)    
 
-##### Overview
+## Overview
 
 _CWS CHIWAVA_ is a multipurpose Java library designed to aid in development of the CWS ecosystem. The motivation behind the development of such component is to avoid repetitiveness and redundancy throughout our codebase, as well as speed up the development process of newly created components.
 
 _CWS CHIWAVA_ is designed with CWS microservices in mind, but its usage is not limited to said microservices.
 
-##### Project structure
+## Project structure
 
 Since _CWS CHIWAVA_ covers a wide spectrum of functionality, the library should be split up into multiple modules, allowing end-users to only use the parts of the library that are necessary for their project.
 
@@ -29,19 +22,19 @@ Said modules should be uploaded to _Nexus_ or any other artifact management syst
 
 Optionally, a convenience module should exist which would include all other project modules.
 
-###### Module naming
+### Module naming
 
 Module naming should follow the gradle `group:artifact:version` format, where the group is `com.nsoft.cws.chiwava`, the artifact is `chiwava-[MODULE_NAME]`, and the version is described in the SemVer format described below.
 
-###### Module versioning
+### Module versioning
 
 Module versioning should be done as described in the [Semantic Versioning](https://semver.org/) system.
 
-###### Open-sourcing
+### Open-sourcing
 
 One of the goals this library aims to achieve is to be available for general use. With this in mind, modules should be written in such a way that they are usable outside of the CWS ecosystem.
 
-##### Writing utility classes
+## Writing utility classes
 
 Every utility class **must _cover one and only one topic_**. [This](%5Bhttps://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java%5D(https://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java) is a bad example of a utility class - it covers multiple topics (JSON (de)serialization, ID generation, Date formatting).
 
@@ -76,7 +69,7 @@ public final class Ids {
 }
 ```
 
-##### Library documentation
+## Library documentation
 
 Javadoc is an easy and convenient way of documenting Java code and getting immediate results in a form of generated documentation pages. But Javadoc has a downside - its generated pages are ugly to say the least.
 
