@@ -23,6 +23,15 @@ public class IdentitiesTest {
     }
 
     @Test
+    public void shouldReconstructUniqueId() {
+        String strippedUUID = Identities.generateUniqueIdStripped();
+
+        String reconstructedUUID = Identities.reconstructPotentialUUID(strippedUUID);
+
+        Assert.assertTrue(Identities.isUUID(reconstructedUUID));
+    }
+
+    @Test
     public void shouldBeUniqueId() {
         Assert.assertTrue(Identities.isUUID(Identities.generateUniqueId()));
     }

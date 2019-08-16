@@ -36,6 +36,40 @@ public final class Identities {
     }
 
     /**
+     * Reconstructs a ({@link UUID}) in String format if the input is alphanumeric and 32 characters
+     * in length
+     *
+     * @param input alphanumeric string with 32 characters
+     * @return reconstructed UUID
+     */
+    public static String reconstructPotentialUUID(String input) {
+        if (isUUID(input)) {
+            return input;
+        }
+
+        if (input.length() != 32) {
+            throw new IllegalArgumentException(
+                    String.format("Invalid input length {found: %s, expected: 32}",
+                            input.length()));
+        }
+
+        for (char c : input.toCharArray()) {
+            if (!isCharacterAlphanumeric(c)) {
+                throw new IllegalArgumentException(
+                        String.format("Illegal character {found: %s}", c));
+            }
+        }
+
+        String first = input.substring(0, 8);
+        String second = input.substring(8, 12);
+        String third = input.substring(12, 16);
+        String fourth = input.substring(16, 20);
+        String fifth = input.substring(20);
+
+        return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
+    }
+
+    /**
      * Checks if the given input is in a valid UUID form
      *
      * @param input String input to check if it's in UUID form
@@ -43,5 +77,9 @@ public final class Identities {
      */
     public static boolean isUUID(String input) {
         return UUID_PATTERN.matcher(input).matches();
+    }
+
+    private static boolean isCharacterAlphanumeric(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
     }
 }
