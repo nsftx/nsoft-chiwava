@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
- * Utility class used for generating unique identifier
+ * Utility class used for various checks and manipulations of unique identifiers
  *
  * @author Mislav Milicevic
  * @since 2019-08-16
@@ -54,7 +54,7 @@ public final class Identities {
         }
 
         for (char c : input.toCharArray()) {
-            if (!isCharacterAlphanumeric(c)) {
+            if (!Characters.isAlphanumeric(c)) {
                 throw new IllegalArgumentException(
                         String.format("Illegal character {found: %s}", c));
             }
@@ -79,7 +79,4 @@ public final class Identities {
         return UUID_PATTERN.matcher(input).matches();
     }
 
-    private static boolean isCharacterAlphanumeric(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
-    }
 }
