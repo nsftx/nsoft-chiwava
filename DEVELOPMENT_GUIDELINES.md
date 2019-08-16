@@ -34,6 +34,20 @@ Module versioning should be done as described in the [Semantic Versioning](https
 
 One of the goals this library aims to achieve is to be available for general use. With this in mind, modules should be written in such a way that they are usable outside of the CWS ecosystem.
 
+## Implementing features
+
+Every feature implementation must be a part of a release milestone. For every milestone, a set of issues is opened in order to track the development progress.
+
+Milestones should follow SemVer mentioned above.
+
+Every release milestone must have a dedicated branch with a 'release/' prefix, eg. 'release/0.1.0'
+
+Feature development must always follow the same branching order: 'feature/id/name' -> 'release/milestone' -> 'master'. 
+
+Every feature must be fully developed before being merged into the release branch. Every release branch must be fully developed before being merged into master.
+
+Before merging into master, the last release commit must be tagged with the milestone version.
+
 ## Writing utility classes
 
 Every utility class **must _cover one and only one topic_**. [This](https://github.com/nsftx/cws-storage-static-files/blob/master/src/application/src/main/java/com/nsoft/cws/storage/esef/application/common/util/RideUtil.java) is a bad example of a utility class - it covers multiple topics (JSON (de)serialization, ID generation, Date formatting).
