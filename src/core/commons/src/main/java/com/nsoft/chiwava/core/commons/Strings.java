@@ -150,4 +150,16 @@ public final class Strings {
 
         return input.substring(0, i) + c + input.substring(i);
     }
+
+    /**
+     * Reverses the character order of the input {@link String}
+     *
+     * @param input String to be reversed
+     * @return reversed input
+     */
+    public static String reverse(String input) {
+        return new StringBuilder(Objects.requireNonNull(input, "Input can't be null")).reverse()
+                .toString();
+    }
+
 }

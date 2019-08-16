@@ -142,6 +142,17 @@ public class StringsTest {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotInsertCharacter_InvalidIndexUpper() {
         Strings.insertCharacterAt("input", 'm', "input".length());
+    }
 
+    @Test
+    public void shouldReverse() {
+        String result = Strings.reverse("input");
+
+        Assert.assertEquals("tupni", result);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotReverse_NullInput() {
+        Strings.reverse(null);
     }
 }
