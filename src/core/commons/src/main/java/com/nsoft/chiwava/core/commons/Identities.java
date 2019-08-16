@@ -1,5 +1,6 @@
 package com.nsoft.chiwava.core.commons;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -43,6 +44,8 @@ public final class Identities {
      * @return reconstructed UUID
      */
     public static String reconstructPotentialUUID(String input) {
+        Objects.requireNonNull(input, "Input can't be null");
+
         if (isUUID(input)) {
             return input;
         }
@@ -76,7 +79,7 @@ public final class Identities {
      * @return if the input is in UUID form
      */
     public static boolean isUUID(String input) {
-        return UUID_PATTERN.matcher(input).matches();
+        return UUID_PATTERN.matcher(Objects.requireNonNull(input, "Input can't be null")).matches();
     }
 
 }
