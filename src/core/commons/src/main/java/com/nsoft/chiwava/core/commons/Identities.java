@@ -38,12 +38,14 @@ public final class Identities {
 
     /**
      * Reconstructs a {@link UUID} in String format if the input is alphanumeric and 32 characters
-     * in length
+     * in length.
+     *
+     * If the input is already a valid UUID, the input will be returned.
      *
      * @param input alphanumeric string with 32 characters
      * @return reconstructed UUID
      */
-    public static String reconstructPotentialUUID(String input) {
+    public static String reconstructStrippedUUID(String input) {
         Objects.requireNonNull(input, "Input can't be null");
 
         if (isUUID(input)) {
@@ -68,6 +70,98 @@ public final class Identities {
         String third = input.substring(12, 16);
         String fourth = input.substring(16, 20);
         String fifth = input.substring(20);
+
+        return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
+    }
+
+    /**
+     * Reconstructs a {@link UUID} with missing hyphens to a valid form.
+     *
+     * If the input is already a valid UUID, the input will be returned.
+     *
+     * @param input UUID with missing hyphens
+     * @return reconstructed UUID
+     */
+    public static String reconstructDamagedUUID(String input) {
+        Objects.requireNonNull(input, "Input can't be null");
+
+        if (isUUID(input)) {
+            return input;
+        }
+
+        if (input.length() < 32 || input.length() > 35) {
+            throw new IllegalArgumentException(
+                    String.format("Invalid input length {found: %s, expected: 32..35}",
+                            input.length()));
+        }
+
+        int hyphenCount = 0;
+
+        for (char c : input.toCharArray()) {
+            if (!Characters.isAlphanumeric(c)) {
+                if (c == '-') {
+                    if (hyphenCount > 4) {
+                        throw new IllegalArgumentException("Too many hyphens");
+                    }
+                    hyphenCount++;
+                    continue;
+                }
+                throw new IllegalArgumentException(
+                        String.format("Illegal character {found: %s}", c));
+            }
+        }
+
+        int firstHyphenPosition = 8;
+        int secondHyphenPosition = 13;
+        int thirdHyphenPosition = 18;
+        int fourthHyphenPosition = 23;
+
+        if (input.charAt(firstHyphenPosition) != '-') {
+            firstHyphenPosition = -1;
+            secondHyphenPosition--;
+            thirdHyphenPosition--;
+            fourthHyphenPosition--;
+        }
+
+        if (input.charAt(secondHyphenPosition) != '-') {
+            secondHyphenPosition = -1;
+            thirdHyphenPosition--;
+            fourthHyphenPosition--;
+        }
+
+        if (input.charAt(thirdHyphenPosition) != '-') {
+            thirdHyphenPosition = -1;
+            fourthHyphenPosition--;
+        }
+
+        if (input.charAt(fourthHyphenPosition) != '-') {
+            fourthHyphenPosition = -1;
+        }
+
+        int firstSubstringPosition = firstHyphenPosition == -1 ? 8 : firstHyphenPosition;
+        int secondSubstringPosition =
+                secondHyphenPosition == -1 ? firstHyphenPosition == -1 ? 12 : 13
+                        : secondHyphenPosition;
+
+        int thirdSubstringPosition =
+                thirdHyphenPosition == -1 ? secondHyphenPosition == -1 ? firstHyphenPosition == -1
+                        ? 16 : 17 : 18 : thirdHyphenPosition;
+        int fourthSubstringPosition =
+                fourthHyphenPosition == -1 ? thirdHyphenPosition == -1 ? secondHyphenPosition == -1
+                        ? firstHyphenPosition == -1 ? 20 : 21 : 22 : 23 : fourthHyphenPosition;
+
+        String first = input.substring(0, firstSubstringPosition);
+        String second = input.substring(
+                firstHyphenPosition == -1 ? firstSubstringPosition : firstSubstringPosition + 1,
+                secondSubstringPosition);
+        String third = input.substring(
+                secondHyphenPosition == -1 ? secondSubstringPosition : secondSubstringPosition + 1,
+                thirdSubstringPosition);
+        String fourth = input.substring(
+                thirdHyphenPosition == -1 ? thirdSubstringPosition : thirdSubstringPosition + 1,
+                fourthSubstringPosition);
+        String fifth = input.substring(fourthHyphenPosition == -1 ? fourthSubstringPosition
+                : fourthSubstringPosition + 1);
 
         return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
     }
