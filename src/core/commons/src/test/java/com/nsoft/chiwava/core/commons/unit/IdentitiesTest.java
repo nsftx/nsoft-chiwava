@@ -31,9 +31,24 @@ public class IdentitiesTest {
         Assert.assertTrue(Identities.isUUID(reconstructedUUID));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotReconstructUniqueId_InvalidLength() {
+        Identities.reconstructPotentialUUID("Invalid input");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotReconstructUniqueId_InvalidCharacter() {
+        Identities.reconstructPotentialUUID("8a9574606dea4c39a732e48d05.26a05");
+    }
+
     @Test
     public void shouldBeUniqueId() {
         Assert.assertTrue(Identities.isUUID(Identities.generateUniqueId()));
+    }
+
+    @Test
+    public void shouldNotBeUniqueId() {
+        Assert.assertFalse(Identities.isUUID("Invalid UUID"));
     }
 
 }
