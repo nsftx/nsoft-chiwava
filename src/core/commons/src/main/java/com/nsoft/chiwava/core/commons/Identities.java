@@ -36,7 +36,7 @@ public final class Identities {
     }
 
     /**
-     * Reconstructs a ({@link UUID}) in String format if the input is alphanumeric and 32 characters
+     * Reconstructs a {@link UUID} in String format if the input is alphanumeric and 32 characters
      * in length
      *
      * @param input alphanumeric string with 32 characters
