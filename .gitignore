@@ -26,6 +26,9 @@ hs_err_pid*
 # Gradle
 .gradle
 /build/
+/src/core/commons/bin/
+/src/core/commons/build/
+/src/core/commons/out/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
