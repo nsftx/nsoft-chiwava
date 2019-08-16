@@ -111,56 +111,56 @@ public final class Identities {
             }
         }
 
-        int firstHyphenPosition = 8;
-        int secondHyphenPosition = 13;
-        int thirdHyphenPosition = 18;
-        int fourthHyphenPosition = 23;
+        int firstHyphenIndex = 8;
+        int secondHyphenIndex = 13;
+        int thirdHyphenIndex = 18;
+        int fourthHyphenIndex = 23;
 
-        if (input.charAt(firstHyphenPosition) != '-') {
-            firstHyphenPosition = -1;
-            secondHyphenPosition--;
-            thirdHyphenPosition--;
-            fourthHyphenPosition--;
+        if (input.charAt(firstHyphenIndex) != '-') {
+            firstHyphenIndex = -1;
+            secondHyphenIndex--;
+            thirdHyphenIndex--;
+            fourthHyphenIndex--;
         }
 
-        if (input.charAt(secondHyphenPosition) != '-') {
-            secondHyphenPosition = -1;
-            thirdHyphenPosition--;
-            fourthHyphenPosition--;
+        if (input.charAt(secondHyphenIndex) != '-') {
+            secondHyphenIndex = -1;
+            thirdHyphenIndex--;
+            fourthHyphenIndex--;
         }
 
-        if (input.charAt(thirdHyphenPosition) != '-') {
-            thirdHyphenPosition = -1;
-            fourthHyphenPosition--;
+        if (input.charAt(thirdHyphenIndex) != '-') {
+            thirdHyphenIndex = -1;
+            fourthHyphenIndex--;
         }
 
-        if (input.charAt(fourthHyphenPosition) != '-') {
-            fourthHyphenPosition = -1;
+        if (input.charAt(fourthHyphenIndex) != '-') {
+            fourthHyphenIndex = -1;
         }
 
-        int firstSubstringPosition = firstHyphenPosition == -1 ? 8 : firstHyphenPosition;
-        int secondSubstringPosition =
-                secondHyphenPosition == -1 ? firstHyphenPosition == -1 ? 12 : 13
-                        : secondHyphenPosition;
-        int thirdSubstringPosition =
-                thirdHyphenPosition == -1 ? secondHyphenPosition == -1 ? firstHyphenPosition == -1
-                        ? 16 : 17 : 18 : thirdHyphenPosition;
-        int fourthSubstringPosition =
-                fourthHyphenPosition == -1 ? thirdHyphenPosition == -1 ? secondHyphenPosition == -1
-                        ? firstHyphenPosition == -1 ? 20 : 21 : 22 : 23 : fourthHyphenPosition;
+        int firstSubstringIndex = firstHyphenIndex == -1 ? 8 : firstHyphenIndex;
+        int secondSubstringIndex =
+                secondHyphenIndex == -1 ? firstHyphenIndex == -1 ? 12 : 13
+                        : secondHyphenIndex;
+        int thirdSubstringIndex =
+                thirdHyphenIndex == -1 ? secondHyphenIndex == -1 ? firstHyphenIndex == -1
+                        ? 16 : 17 : 18 : thirdHyphenIndex;
+        int fourthSubstringIndex =
+                fourthHyphenIndex == -1 ? thirdHyphenIndex == -1 ? secondHyphenIndex == -1
+                        ? firstHyphenIndex == -1 ? 20 : 21 : 22 : 23 : fourthHyphenIndex;
 
-        String first = input.substring(0, firstSubstringPosition);
+        String first = input.substring(0, firstSubstringIndex);
         String second = input.substring(
-                firstHyphenPosition == -1 ? firstSubstringPosition : firstSubstringPosition + 1,
-                secondSubstringPosition);
+                firstHyphenIndex == -1 ? firstSubstringIndex : firstSubstringIndex + 1,
+                secondSubstringIndex);
         String third = input.substring(
-                secondHyphenPosition == -1 ? secondSubstringPosition : secondSubstringPosition + 1,
-                thirdSubstringPosition);
+                secondHyphenIndex == -1 ? secondSubstringIndex : secondSubstringIndex + 1,
+                thirdSubstringIndex);
         String fourth = input.substring(
-                thirdHyphenPosition == -1 ? thirdSubstringPosition : thirdSubstringPosition + 1,
-                fourthSubstringPosition);
-        String fifth = input.substring(fourthHyphenPosition == -1 ? fourthSubstringPosition
-                : fourthSubstringPosition + 1);
+                thirdHyphenIndex == -1 ? thirdSubstringIndex : thirdSubstringIndex + 1,
+                fourthSubstringIndex);
+        String fifth = input.substring(fourthHyphenIndex == -1 ? fourthSubstringIndex
+                : fourthSubstringIndex + 1);
 
         return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
     }
