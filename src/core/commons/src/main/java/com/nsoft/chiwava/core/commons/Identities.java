@@ -142,7 +142,6 @@ public final class Identities {
         int secondSubstringPosition =
                 secondHyphenPosition == -1 ? firstHyphenPosition == -1 ? 12 : 13
                         : secondHyphenPosition;
-
         int thirdSubstringPosition =
                 thirdHyphenPosition == -1 ? secondHyphenPosition == -1 ? firstHyphenPosition == -1
                         ? 16 : 17 : 18 : thirdHyphenPosition;
