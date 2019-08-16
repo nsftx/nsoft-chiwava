@@ -35,7 +35,7 @@ public final class Strings {
 
         if (n < 1 || n > input.length()) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 1 || %d <=}", n,
+                    String.format("Invalid character index {found: %d, expected: >= 1 && %d <=}", n,
                             input.length()));
         }
 
@@ -64,7 +64,7 @@ public final class Strings {
 
         if (n < 1 || n > input.length()) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 1 || %d <=}", n,
+                    String.format("Invalid character index {found: %d, expected: >= 1 && %d <=}", n,
                             input.length()));
         }
 
@@ -94,7 +94,7 @@ public final class Strings {
 
         if (n < 1 || n > input.length()) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 1 || %d <=}", n,
+                    String.format("Invalid character index {found: %d, expected: >= 1 && %d <=}", n,
                             input.length()));
         }
 
@@ -123,7 +123,7 @@ public final class Strings {
 
         if (n < 1 || n > input.length()) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 1 || %d <=}", n,
+                    String.format("Invalid character index {found: %d, expected: >= 1 && %d <=}", n,
                             input.length()));
         }
 
@@ -144,7 +144,7 @@ public final class Strings {
 
         if (i < 0 || i > input.length() - 1) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 0 || %d <=}", i,
+                    String.format("Invalid character index {found: %d, expected: >= 0 && %d <=}", i,
                             input.length() - 1));
         }
 
@@ -165,7 +165,7 @@ public final class Strings {
 
         if (i < 0 || i > input.length() - 1) {
             throw new IllegalArgumentException(
-                    String.format("Invalid character index {found: %d, expected: >= 0 || %d <=}", i,
+                    String.format("Invalid character index {found: %d, expected: >= 0 && %d <=}", i,
                             input.length() - 1));
         }
 

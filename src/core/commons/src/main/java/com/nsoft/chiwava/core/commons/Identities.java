@@ -91,7 +91,7 @@ public final class Identities {
 
         if (input.length() < 32 || input.length() > 35) {
             throw new IllegalArgumentException(
-                    String.format("Invalid input length {found: %s, expected: 32..35}",
+                    String.format("Invalid input length {found: %s, expected: >= 32 && 35 <=}",
                             input.length()));
         }
 
