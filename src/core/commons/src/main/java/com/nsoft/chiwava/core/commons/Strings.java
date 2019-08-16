@@ -134,7 +134,7 @@ public final class Strings {
     /**
      * Inserts a character into a {@link String} at a specified position
      *
-     * @param input String to be manipulated
+     * @param input String to be inserted into
      * @param c character to be inserted
      * @param i index at which the character will be inserted
      * @return input with inserted character at specified index
@@ -149,6 +149,27 @@ public final class Strings {
         }
 
         return input.substring(0, i) + c + input.substring(i);
+    }
+
+    /**
+     * Inserts a {@link String} into a {@link String} at a specified position
+     *
+     * @param input String to be inserted into
+     * @param insert String to be inserted
+     * @param i index at which the String will be inserted
+     * @return input with inserted String at specified index
+     */
+    public static String insertStringAt(String input, String insert, int i) {
+        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(insert, "Insert can't be null");
+
+        if (i < 0 || i > input.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("Invalid character index {found: %d, expected: >= 0 || %d <=}", i,
+                            input.length() - 1));
+        }
+
+        return input.substring(0, i) + insert + input.substring(i);
     }
 
     /**

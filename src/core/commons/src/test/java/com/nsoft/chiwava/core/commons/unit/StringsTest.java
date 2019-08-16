@@ -145,6 +145,33 @@ public class StringsTest {
     }
 
     @Test
+    public void shouldInsertString() {
+        String result = Strings.insertStringAt("input", "put", 2);
+
+        Assert.assertEquals("inputput", result);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotInsertString_NullInput() {
+        Strings.insertStringAt(null, "put", 2);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotInsertString_NullInsert() {
+        Strings.insertStringAt("input", null, 2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotInsertString_InvalidIndexLower() {
+        Strings.insertStringAt("input", "put", -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotInsertString_InvalidIndexUpper() {
+        Strings.insertStringAt("input", "put", "input".length());
+    }
+
+    @Test
     public void shouldReverse() {
         String result = Strings.reverse("input");
 
