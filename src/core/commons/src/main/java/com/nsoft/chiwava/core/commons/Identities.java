@@ -1,7 +1,9 @@
 package com.nsoft.chiwava.core.commons;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.function.IntUnaryOperator;
 import java.util.regex.Pattern;
 
 /**
@@ -65,11 +67,11 @@ public final class Identities {
             }
         }
 
-        String first = input.substring(0, 8);
-        String second = input.substring(8, 12);
-        String third = input.substring(12, 16);
-        String fourth = input.substring(16, 20);
-        String fifth = input.substring(20);
+        final String first = input.substring(0, 8);
+        final String second = input.substring(8, 12);
+        final String third = input.substring(12, 16);
+        final String fourth = input.substring(16, 20);
+        final String fifth = input.substring(20);
 
         return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
     }
@@ -78,6 +80,8 @@ public final class Identities {
      * Reconstructs a {@link UUID} with missing hyphens to a valid form.
      *
      * If the input is already a valid UUID, the input will be returned.
+     *
+     * <b>Note: The reconstruction process is quite expensive</b>
      *
      * @param input UUID with missing hyphens
      * @return reconstructed UUID
@@ -111,56 +115,53 @@ public final class Identities {
             }
         }
 
-        int firstHyphenIndex = 8;
-        int secondHyphenIndex = 13;
-        int thirdHyphenIndex = 18;
-        int fourthHyphenIndex = 23;
+        final int[] originalHyphenIndices = {8, 13, 18, 23};
 
-        if (input.charAt(firstHyphenIndex) != '-') {
-            firstHyphenIndex = -1;
-            secondHyphenIndex--;
-            thirdHyphenIndex--;
-            fourthHyphenIndex--;
+        int[] hyphenIndices = originalHyphenIndices.clone();
+
+        for (int i = 0; i < hyphenIndices.length; i++) {
+            if (input.charAt(hyphenIndices[i]) != '-') {
+                hyphenIndices[i] = -1;
+                for (int j = i + 1; j < hyphenIndices.length; j++) {
+                    hyphenIndices[j]--;
+                }
+            }
         }
 
-        if (input.charAt(secondHyphenIndex) != '-') {
-            secondHyphenIndex = -1;
-            thirdHyphenIndex--;
-            fourthHyphenIndex--;
+        int[] substringIndices = Arrays.stream(originalHyphenIndices).map(x -> x + 1).toArray();
+
+        for (int i = 0; i < substringIndices.length; i++) {
+            if (hyphenIndices[i] != -1) {
+                substringIndices[i] = hyphenIndices[i];
+                continue;
+            } else {
+                substringIndices[i] = originalHyphenIndices[i];
+            }
+
+            for (int j = i - 1; j >= 0; j--) {
+                if (hyphenIndices[j] != -1) {
+                    break;
+                }
+
+                substringIndices[i]--;
+            }
         }
 
-        if (input.charAt(thirdHyphenIndex) != '-') {
-            thirdHyphenIndex = -1;
-            fourthHyphenIndex--;
-        }
+        IntUnaryOperator normalizeIndex = x -> x == -1 ? 0 : 1;
 
-        if (input.charAt(fourthHyphenIndex) != '-') {
-            fourthHyphenIndex = -1;
-        }
-
-        int firstSubstringIndex = firstHyphenIndex == -1 ? 8 : firstHyphenIndex;
-        int secondSubstringIndex =
-                secondHyphenIndex == -1 ? firstHyphenIndex == -1 ? 12 : 13
-                        : secondHyphenIndex;
-        int thirdSubstringIndex =
-                thirdHyphenIndex == -1 ? secondHyphenIndex == -1 ? firstHyphenIndex == -1
-                        ? 16 : 17 : 18 : thirdHyphenIndex;
-        int fourthSubstringIndex =
-                fourthHyphenIndex == -1 ? thirdHyphenIndex == -1 ? secondHyphenIndex == -1
-                        ? firstHyphenIndex == -1 ? 20 : 21 : 22 : 23 : fourthHyphenIndex;
-
-        String first = input.substring(0, firstSubstringIndex);
-        String second = input.substring(
-                firstHyphenIndex == -1 ? firstSubstringIndex : firstSubstringIndex + 1,
-                secondSubstringIndex);
-        String third = input.substring(
-                secondHyphenIndex == -1 ? secondSubstringIndex : secondSubstringIndex + 1,
-                thirdSubstringIndex);
-        String fourth = input.substring(
-                thirdHyphenIndex == -1 ? thirdSubstringIndex : thirdSubstringIndex + 1,
-                fourthSubstringIndex);
-        String fifth = input.substring(fourthHyphenIndex == -1 ? fourthSubstringIndex
-                : fourthSubstringIndex + 1);
+        final String first = input.substring(0, substringIndices[0]);
+        final String second = input
+                .substring(substringIndices[0] + normalizeIndex.applyAsInt(hyphenIndices[0]),
+                        substringIndices[1]);
+        final String third = input
+                .substring(substringIndices[1] + normalizeIndex.applyAsInt(hyphenIndices[1]),
+                        substringIndices[2]);
+        final String fourth = input
+                .substring(substringIndices[2] + normalizeIndex.applyAsInt(hyphenIndices[2]),
+                        substringIndices[3]);
+        final String fifth = input
+                .substring(substringIndices[3] + normalizeIndex.applyAsInt(hyphenIndices[3])
+                );
 
         return first + '-' + second + '-' + third + '-' + fourth + '-' + fifth;
     }
