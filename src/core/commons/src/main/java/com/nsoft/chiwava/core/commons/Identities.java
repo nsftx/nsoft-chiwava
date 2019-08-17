@@ -142,7 +142,6 @@ public final class Identities {
                 if (hyphenIndices[j] != -1) {
                     break;
                 }
-
                 substringIndices[i]--;
             }
         }
