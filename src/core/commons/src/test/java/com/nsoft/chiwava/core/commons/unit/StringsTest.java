@@ -182,4 +182,32 @@ public class StringsTest {
     public void shouldNotReverse_NullInput() {
         Strings.reverse(null);
     }
+
+    @Test
+    public void shouldGetNumberOfUpperCaseCharacters() {
+        String input = "iNpuT";
+
+        int num = Strings.getNumberOfUpperCaseCharacters(input);
+
+        Assert.assertEquals(2, num);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotGetNumberOfUpperCaseCharacters_NullInput() {
+        Strings.getNumberOfUpperCaseCharacters(null);
+    }
+
+    @Test
+    public void shouldGetNumberOfLowerCaseCharacters() {
+        String input = "iNpuT";
+
+        int num = Strings.getNumberOfLowerCaseCharacters(input);
+
+        Assert.assertEquals(3, num);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldNotGetNumberOfLowerCaseCharacters_NullInput() {
+        Strings.getNumberOfLowerCaseCharacters(null);
+    }
 }
