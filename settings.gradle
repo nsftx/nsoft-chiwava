@@ -1,4 +1,0 @@
-rootProject.name = 'chiwava'
-
-include 'chiwava-core-commons'
-project(':chiwava-core-commons').projectDir = file('src/core/commons')
