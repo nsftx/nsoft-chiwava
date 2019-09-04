@@ -58,4 +58,12 @@
         <system>Github</system>
         <url>https://github.com/nsftx/chiwava/issues</url>
     </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub nsftx Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/nsftx/chiwava</url>
+        </repository>
+    </distributionManagement>
 </project>
