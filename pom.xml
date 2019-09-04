@@ -33,7 +33,7 @@
     </build>
 
     <modules>
-        <module>src/core/commons</module>
+        <module>chiwava-core/commons</module>
     </modules>
 
     <properties>
