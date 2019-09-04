@@ -183,4 +183,44 @@ public final class Strings {
                 .toString();
     }
 
+    /**
+     * Gets the number of uppercase characters in the input {@link String}
+     *
+     * @param input String to be checked
+     * @return number of uppercase characters in input
+     */
+    public static int getNumberOfUpperCaseCharacters(String input) {
+        Objects.requireNonNull(input, "Input can't be null");
+
+        int res = 0;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                res++;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Gets the number of lowercase characters in the input {@link String}
+     *
+     * @param input String to be checked
+     * @return number of lowercase characters in input
+     */
+    public static int getNumberOfLowerCaseCharacters(String input) {
+        Objects.requireNonNull(input, "Input can't be null");
+
+        int res = 0;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                res++;
+            }
+        }
+
+        return res;
+    }
+
 }
