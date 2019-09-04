@@ -24,8 +24,8 @@
 hs_err_pid*
 
 # Maven
-chiwava-core/commons/build/
-chiwava-core/commons/target/
+core/commons/build/
+core/commons/target/
 
 ### STS ###
 .apt_generated
