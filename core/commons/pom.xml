@@ -11,8 +11,8 @@
     </parent>
 
     <artifactId>chiwava-core-commons</artifactId>
-    <version>0.1.0</version>
-    <packaging>pom</packaging>
+    <version>0.1.2</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
