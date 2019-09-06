@@ -21,7 +21,7 @@ repositories {
             username "$mavenUser"
             password "$mavenPassword"
         }
-        url 'https://maven.pkg.github.com/nsftx/cws-flow-specification'
+        url 'https://maven.pkg.github.com/nsftx/chiwava'
     }
 }
 ```
