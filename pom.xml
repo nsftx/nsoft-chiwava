@@ -35,7 +35,9 @@
     <modules>
         <module>core/commons</module>
         <module>debezium/commons</module>
+        <module>spring/pagination</module>
         <module>spring/pagination/core</module>
+        <module>spring/pagination/resolver</module>
     </modules>
 
     <properties>
@@ -45,6 +47,7 @@
         <lombok.version>1.18.8</lombok.version>
         <jackson.version>2.9.9</jackson.version>
         <spring.version>2.1.10.RELEASE</spring.version>
+        <spring.web.version>5.1.9.RELEASE</spring.web.version>
     </properties>
 
     <organization>

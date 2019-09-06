@@ -15,5 +15,10 @@
             <artifactId>chiwava-spring-pagination-core</artifactId>
             <version>0.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.nsoft.chiwava</groupId>
+            <artifactId>chiwava-spring-pagination-resolver</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 </project>
