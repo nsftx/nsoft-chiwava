@@ -26,6 +26,8 @@ hs_err_pid*
 # Maven
 core/commons/build/
 core/commons/target/
+debezium/commons/build/
+debezium/commons/target/
 
 ### STS ###
 .apt_generated

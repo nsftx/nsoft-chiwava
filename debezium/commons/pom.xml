@@ -10,15 +10,16 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>chiwava-core-commons</artifactId>
-    <version>0.1.2</version>
+    <artifactId>chiwava-debezium-commons</artifactId>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -26,9 +27,9 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>com.nsoft.chiwava</groupId>
+            <artifactId>chiwava-core-commons</artifactId>
+            <version>0.1.2</version>
         </dependency>
     </dependencies>
 </project>
