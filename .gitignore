@@ -28,6 +28,10 @@ core/commons/build/
 core/commons/target/
 debezium/commons/build/
 debezium/commons/target/
+spring/pagination/core/build/
+spring/pagination/core/target/
+spring/pagination/resolver/build/
+spring/pagination/resolver/target/
 
 ### STS ###
 .apt_generated
