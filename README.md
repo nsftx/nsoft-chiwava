@@ -35,6 +35,7 @@ dependencies {
 
 ## Available modules
 - core-commons:0.1.2
+- core-persistence:0.1.0
 - debezium-commons:0.1.1
 - spring-pagination-core:0.1.0
 - spring-pagination-resolver:0.1.0
