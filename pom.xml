@@ -12,7 +12,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -34,12 +34,21 @@
 
     <modules>
         <module>core/commons</module>
+        <module>core/error</module>
+        <module>core/persistence</module>
+        <module>debezium/commons</module>
+        <module>spring/pagination/core</module>
+        <module>spring/pagination/resolver</module>
     </modules>
 
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
         <junit.version>4.12</junit.version>
+        <lombok.version>1.18.8</lombok.version>
+        <jackson.version>2.9.9</jackson.version>
+        <spring.version>2.1.10.RELEASE</spring.version>
+        <spring.web.version>5.1.9.RELEASE</spring.web.version>
     </properties>
 
     <organization>
