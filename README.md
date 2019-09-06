@@ -29,6 +29,10 @@ repositories {
 3. Install the needed CHIWAVA modules
 ```
 dependencies {
-    compile("com.nsoft.chiwava:chiwava-core-commons:0.1.2")
+    compile("com.nsoft.chiwava:chiwava-MODULE_NAME:VERSION")
 }
 ```
+
+## Available modules
+- core-commons:0.1.2
+- debezium-commons:0.1.1
