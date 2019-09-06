@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
  * The implementing class needs be annotated with {@link javax.persistence.EntityListeners} with
  * {@link com.nsoft.chiwava.core.persistence.listener.PersistenceTimestampableListener} as an
  * argument to enable pre-persist timestamping
+ *
+ * @author Mislav Milicevic
+ * @since 2019-09-06
  */
 public interface PersistenceTimestampable {
 
