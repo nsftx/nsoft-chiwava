@@ -26,6 +26,8 @@ hs_err_pid*
 # Maven
 core/commons/build/
 core/commons/target/
+core/persistence/build/
+core/persistence/target/
 debezium/commons/build/
 debezium/commons/target/
 spring/pagination/core/build/

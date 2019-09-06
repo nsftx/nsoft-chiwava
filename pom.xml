@@ -34,8 +34,8 @@
 
     <modules>
         <module>core/commons</module>
+        <module>core/persistence</module>
         <module>debezium/commons</module>
-        <module>spring/pagination</module>
         <module>spring/pagination/core</module>
         <module>spring/pagination/resolver</module>
     </modules>
