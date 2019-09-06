@@ -5,7 +5,7 @@ CWS common libraries for Java
 
 CHIWAVA uses GitHub's package registry as a deployment solution. If your project is using Maven, please follow the this [guide](https://help.github.com/en/articles/configuring-apache-maven-for-use-with-github-package-registry#installing-a-package).
 
-If your project is using Gradle, please follow the steps below.
+If your project is using Gradle, please follow the steps below:
 
 1. Create a system gradle.properties file in ~/.gradle/ and add the following properties:
 ```
