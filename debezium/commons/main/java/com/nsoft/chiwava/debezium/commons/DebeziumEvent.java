@@ -11,6 +11,12 @@ import lombok.Setter;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * POJO representation of a Debezium event
+ *
+ * @author Mislav Milicevic
+ * @since 2019-06-09
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DebeziumEvent {
 
@@ -54,6 +60,12 @@ public class DebeziumEvent {
                 new Candidate(this.source.getDb(), this.source.getTable(), this.getOperation());
     }
 
+    /**
+     * Constructs the after state of the event
+     *
+     * @param clazz model class
+     * @return constructed after state
+     */
     public <T> Optional<T> constructAfterTo(Class<T> clazz) {
         if (this.getAfter() == null) {
             return Optional.empty();
@@ -62,6 +74,12 @@ public class DebeziumEvent {
         return Optional.of(JSON_MAPPER.fromJson(JSON_MAPPER.toJson(this.getAfter()), clazz));
     }
 
+    /**
+     * Constructs the before state of the event
+     *
+     * @param clazz model class
+     * @return constructed before state
+     */
     public <T> Optional<T> constructBeforeTo(Class<T> clazz) {
         if (this.getBefore() == null) {
             return Optional.empty();
@@ -70,10 +88,22 @@ public class DebeziumEvent {
         return Optional.of(JSON_MAPPER.fromJson(JSON_MAPPER.toJson(this.getBefore()), clazz));
     }
 
+    /**
+     * Returns an item from the event after state based on its key
+     *
+     * @param key item key
+     * @return item from after state
+     */
     public Object getAfterItemByKey(String key) {
         return this.getAfter().get(key);
     }
 
+    /**
+     * Return an item from the event before state based on its key
+     *
+     * @param key item key
+     * @return item from before state
+     */
     public boolean hasAfterItemByKey(String key) {
         return this.getAfter().containsKey(key);
     }

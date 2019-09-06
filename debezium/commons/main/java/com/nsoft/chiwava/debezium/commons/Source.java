@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+/**
+ * POJO representation of a debezium source object
+ *
+ * @author Mislav Milicevic
+ * @since 2019-06-09
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Source {
     @Getter
