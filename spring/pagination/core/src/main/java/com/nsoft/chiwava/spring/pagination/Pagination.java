@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
  * Pagination representation
  *
  * @author Mislav Milicevic
- * @since 2019-06-09
+ * @since 2019-09-06
  */
 @Getter
 @Setter
