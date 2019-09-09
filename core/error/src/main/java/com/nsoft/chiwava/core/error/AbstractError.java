@@ -7,4 +7,11 @@ package com.nsoft.chiwava.core.error;
  * @since 2019-09-06
  */
 public abstract class AbstractError extends RuntimeException implements Error {
+    public AbstractError() {
+        super();
+    }
+
+    public AbstractError(String message) {
+        super(message);
+    }
 }
