@@ -8,12 +8,11 @@
     <parent>
         <groupId>com.nsoft.chiwava</groupId>
         <artifactId>chiwava</artifactId>
-        <version>0.1.0</version>
-        <relativePath>../../../pom.xml</relativePath>
+        <version>0.2.0</version>
     </parent>
 
     <artifactId>chiwava-spring-pagination-resolver</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
