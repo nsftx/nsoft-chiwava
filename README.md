@@ -39,4 +39,4 @@ dependencies {
 - core-persistence:0.2.1
 - debezium-commons:0.2.0
 - spring-pagination-core:0.2.1
-- spring-pagination-resolver:0.2.0
+- spring-pagination-resolver:0.2.1
