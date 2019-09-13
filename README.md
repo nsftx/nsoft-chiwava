@@ -3,6 +3,8 @@ CWS common libraries for Java
 
 ## Installation
 
+**Note**: CHIWAVA is migrating to Maven Central, use the guide below for versions below v1.0.0
+
 CHIWAVA uses GitHub's package registry as a deployment solution. If your project is using Maven, please follow the this [guide](https://help.github.com/en/articles/configuring-apache-maven-for-use-with-github-package-registry#installing-a-package).
 
 If your project is using Gradle, please follow the steps below:
