@@ -43,3 +43,6 @@ dependencies {
 - debezium-commons:1.0.0
 - spring-pagination-core:1.0.0
 - spring-pagination-resolver:1.0.0
+
+## License
+This project is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0)
