@@ -1,7 +1,10 @@
-# chiwava
-CWS common libraries for Java
+# CHIWAVA
+
+CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Java projects.
 
 ## Installation
+
+**Note**: CHIWAVA is migrating to Maven Central, use the guide below for versions below v1.0.0
 
 CHIWAVA uses GitHub's package registry as a deployment solution. If your project is using Maven, please follow the this [guide](https://help.github.com/en/articles/configuring-apache-maven-for-use-with-github-package-registry#installing-a-package).
 
