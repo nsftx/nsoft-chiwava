@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>chiwava-debezium-commons</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.nsoft.chiwava</groupId>
             <artifactId>chiwava-core-commons</artifactId>
-            <version>0.1.2</version>
+            <version>0.2.0</version>
         </dependency>
     </dependencies>
 </project>
