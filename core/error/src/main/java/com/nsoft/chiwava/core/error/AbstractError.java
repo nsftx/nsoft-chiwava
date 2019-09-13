@@ -6,10 +6,12 @@ package com.nsoft.chiwava.core.error;
  * <pre>
  *     public class ResourceNotFoundException extends AbstractError {
  *
+ *         &#64;Override
  *         public Status getStatus() {
  *             return Status.NOT_FOUND;
  *         }
  *
+ *         &#64;Override
  *         public Title getTitle() {
  *             return ErrorTitles.RESOURCE_NOT_FOUND;
  *         }
