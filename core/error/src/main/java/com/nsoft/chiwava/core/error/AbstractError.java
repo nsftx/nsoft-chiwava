@@ -3,6 +3,19 @@ package com.nsoft.chiwava.core.error;
 /**
  * Abstract implementation of {@link Error}
  *
+ * <pre>
+ *     public class ResourceNotFoundException extends AbstractError {
+ *
+ *         public Status getStatus() {
+ *             return Status.NOT_FOUND;
+ *         }
+ *
+ *         public Title getTitle() {
+ *             return ErrorTitles.RESOURCE_NOT_FOUND;
+ *         }
+ *     }
+ * </pre>
+ *
  * @author Mislav Milicevic
  * @since 2019-09-06
  */
