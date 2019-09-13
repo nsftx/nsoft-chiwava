@@ -17,6 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Used to resolve pagination arguments in http requests
+ *
+ * <pre>
+ *     public class SpringFoxConfig extends WebMvcConfigurationSupport {
+ *         ...
+ *         &#64;Override
+ *         protected void addArgumentResolvers(List&#60;HandlerMethodArgumentResolver&#62; argumentResolvers) {
+ *              ExtendedPageableHandlerMethodArgumentResolver resolver =
+ *                new ExtendedPageableHandlerMethodArgumentResolver();
+ *              argumentResolvers.add(resolver);
+ *              super.addArgumentResolvers(argumentResolvers);
+ *         }
+ *         ...
+ *     }
+ * </pre>
+ */
 public class ExtendedPageableHandlerMethodArgumentResolver extends
         PageableHandlerMethodArgumentResolver {
 
