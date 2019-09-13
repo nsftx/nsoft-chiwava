@@ -13,6 +13,24 @@ import java.util.Set;
 /**
  * Simple wrapper of Jackson's Object Mapper
  *
+ * <pre>
+ *     final JsonMapper jsonMapper = new JsonMapper();
+ *     or
+ *     final JsonMapper jsonMapper = new JsonMapper.Builder().withModule(...).build();
+ *     ...
+ *
+ *     &#64;AllArgsConstructor
+ *     &#64;Getter
+ *     public class Point {
+ *         private int x;
+ *         private int y;
+ *     }
+ *
+ *     String pointToJson = jsonMapper.toJson(new Point(1, 1));
+ *
+ *     Point jsonToPoint = jsonMapper.fromJson(pointToJson, Point.class)
+ * </pre>
+ *
  * @author Mislav Milicevic
  * @since 2019-09-04
  */
@@ -96,7 +114,7 @@ public final class JsonMapper {
 
         /**
          * Adds multiple modules to the registration list
-         * */
+         */
         public Builder withModules(Module... moduleList) {
             modules.addAll(Arrays.asList(moduleList));
             return this;
@@ -104,7 +122,7 @@ public final class JsonMapper {
 
         /**
          * Builds the JsonMapper with the previously configured options
-         * */
+         */
         public JsonMapper build() {
             ObjectMapper objectMapper = new ObjectMapper();
             modules.forEach(objectMapper::registerModule);
