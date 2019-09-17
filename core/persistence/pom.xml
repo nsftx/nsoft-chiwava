@@ -13,6 +13,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+    <name>CHIWAVA Core Persistence</name>
+
     <dependencies>
         <dependency>
             <groupId>javax.persistence</groupId>

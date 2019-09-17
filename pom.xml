@@ -15,7 +15,9 @@
     <packaging>pom</packaging>
 
     <name>CHIWAVA</name>
-    <description>CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Java projects.</description>
+    <description>
+        CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
+    </description>
     <url>https://github.com/nsftx/nsoft-chiwava</url>
 
     <dependencies>

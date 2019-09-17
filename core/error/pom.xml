@@ -13,6 +13,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+    <name>CHIWAVA Core Error</name>
+
     <dependencies>
         <dependency>
             <groupId>org.zalando</groupId>
