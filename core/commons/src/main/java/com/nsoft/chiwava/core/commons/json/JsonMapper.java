@@ -81,6 +81,7 @@ public final class JsonMapper {
      *
      * @param json input JSON String
      * @param clazz runtime class wrapper
+     * @param <T> type to map
      * @return object instance generated from JSON String
      */
     public <T> T fromJson(String json, Class<T> clazz) {
@@ -98,6 +99,7 @@ public final class JsonMapper {
      *
      * @param json input JSON String
      * @param typeReference type reference
+     * @param <T> type to map
      * @return object instance generated from JSON String
      */
     public <T> T fromJson(String json, TypeReference<T> typeReference) {
@@ -122,6 +124,9 @@ public final class JsonMapper {
 
         /**
          * Adds a module to the registration list
+         *
+         * @param module {@link Module} to register
+         * @return {@link Builder} instance
          */
         public Builder withModule(Module module) {
             modules.add(module);
@@ -130,6 +135,9 @@ public final class JsonMapper {
 
         /**
          * Adds multiple modules to the registration list
+         *
+         * @param moduleList list of modules to register
+         * @return {@link Builder} instance
          */
         public Builder withModules(Module... moduleList) {
             modules.addAll(Arrays.asList(moduleList));
@@ -138,6 +146,8 @@ public final class JsonMapper {
 
         /**
          * Builds the JsonMapper with the previously configured options
+         *
+         * @return built {@link JsonMapper}
          */
         public JsonMapper build() {
             ObjectMapper objectMapper = new ObjectMapper();
