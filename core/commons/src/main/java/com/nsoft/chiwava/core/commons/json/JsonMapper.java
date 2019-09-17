@@ -1,3 +1,19 @@
+/*
+ * Copyright 2019 NSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.nsoft.chiwava.core.commons.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,6 +28,24 @@ import java.util.Set;
 
 /**
  * Simple wrapper of Jackson's Object Mapper
+ *
+ * <pre>
+ *     final JsonMapper jsonMapper = new JsonMapper();
+ *     or
+ *     final JsonMapper jsonMapper = new JsonMapper.Builder().withModule(...).build();
+ *     ...
+ *
+ *     &#64;AllArgsConstructor
+ *     &#64;Getter
+ *     public class Point {
+ *         private int x;
+ *         private int y;
+ *     }
+ *
+ *     String pointToJson = jsonMapper.toJson(new Point(1, 1));
+ *
+ *     Point jsonToPoint = jsonMapper.fromJson(pointToJson, Point.class)
+ * </pre>
  *
  * @author Mislav Milicevic
  * @since 2019-09-04
@@ -47,6 +81,7 @@ public final class JsonMapper {
      *
      * @param json input JSON String
      * @param clazz runtime class wrapper
+     * @param <T> type to map
      * @return object instance generated from JSON String
      */
     public <T> T fromJson(String json, Class<T> clazz) {
@@ -64,6 +99,7 @@ public final class JsonMapper {
      *
      * @param json input JSON String
      * @param typeReference type reference
+     * @param <T> type to map
      * @return object instance generated from JSON String
      */
     public <T> T fromJson(String json, TypeReference<T> typeReference) {
@@ -88,6 +124,9 @@ public final class JsonMapper {
 
         /**
          * Adds a module to the registration list
+         *
+         * @param module {@link Module} to register
+         * @return {@link Builder} instance
          */
         public Builder withModule(Module module) {
             modules.add(module);
@@ -96,7 +135,10 @@ public final class JsonMapper {
 
         /**
          * Adds multiple modules to the registration list
-         * */
+         *
+         * @param moduleList list of modules to register
+         * @return {@link Builder} instance
+         */
         public Builder withModules(Module... moduleList) {
             modules.addAll(Arrays.asList(moduleList));
             return this;
@@ -104,7 +146,9 @@ public final class JsonMapper {
 
         /**
          * Builds the JsonMapper with the previously configured options
-         * */
+         *
+         * @return built {@link JsonMapper}
+         */
         public JsonMapper build() {
             ObjectMapper objectMapper = new ObjectMapper();
             modules.forEach(objectMapper::registerModule);

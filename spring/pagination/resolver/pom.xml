@@ -8,12 +8,14 @@
     <parent>
         <groupId>com.nsoft.chiwava</groupId>
         <artifactId>chiwava</artifactId>
-        <version>0.2.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>chiwava-spring-pagination-resolver</artifactId>
-    <version>0.2.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <name>CHIWAVA Spring Pagination Resolver</name>
 
     <dependencies>
         <dependency>
@@ -35,12 +37,12 @@
         <dependency>
             <groupId>com.nsoft.chiwava</groupId>
             <artifactId>chiwava-spring-pagination-core</artifactId>
-            <version>0.2.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.nsoft.chiwava</groupId>
             <artifactId>chiwava-core-error</artifactId>
-            <version>0.2.1</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 </project>

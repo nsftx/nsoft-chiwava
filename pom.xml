@@ -5,8 +5,14 @@
 
     <groupId>com.nsoft.chiwava</groupId>
     <artifactId>chiwava</artifactId>
-    <version>0.2.0</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
+
+    <name>CHIWAVA</name>
+    <description>
+        CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
+    </description>
+    <url>https://github.com/nsftx/nsoft-chiwava</url>
 
     <dependencies>
         <dependency>
@@ -29,8 +35,87 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>staging</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <includes>
+                        <include>org.codehaus.plexus:*</include>
+                        <include>junit:junit</include>
+                    </includes>
+                    <excludes>
+                        <exclude>org.codehaus.plexus:plexus-utils</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphrase>${gpg.passphrase}</passphrase>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <modules>
         <module>core/commons</module>
@@ -51,6 +136,13 @@
         <spring.web.version>5.1.9.RELEASE</spring.web.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
     <organization>
         <name>NSoft</name>
         <url>https://nsoft.com</url>
@@ -63,16 +155,25 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/nsftx/nsoft-chiwava.git</connection>
+        <developerConnection>scm:git:ssh://github.com:nsftx/nsoft-chiwava.git</developerConnection>
+        <url>https://github.com/nsftx/nsoft-chiwava</url>
+    </scm>
+
     <issueManagement>
         <system>Github</system>
         <url>https://github.com/nsftx/chiwava/issues</url>
     </issueManagement>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>snapshot</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub nsftx Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/nsftx/chiwava</url>
+            <id>staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 </project>
