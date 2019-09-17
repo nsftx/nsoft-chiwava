@@ -1,6 +1,6 @@
 # CHIWAVA
 
-CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Java projects.
+CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
 
 ## Installation
 
@@ -26,13 +26,13 @@ dependencies {
 }
 ```
 
-## Available modules
-- core-commons:1.0.0
-- core-error:1.0.0
-- core-persistence:1.0.0
-- debezium-commons:1.0.0
-- spring-pagination-core:1.0.0
-- spring-pagination-resolver:1.0.0
+### Available modules
+- chiwava-core-commons:1.0.0
+- chiwava-core-error:1.0.0
+- chiwava-core-persistence:1.0.0
+- chiwava-debezium-commons:1.0.0
+- chiwava-spring-pagination-core:1.0.0
+- chiwava-spring-pagination-resolver:1.0.0
 
 ## License
 This project is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0)
