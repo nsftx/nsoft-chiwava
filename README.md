@@ -4,35 +4,25 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
 
 ## Installation
 
-**Note**: CHIWAVA is migrating to Maven Central, use the guide below for versions below v1.0.0
-
-CHIWAVA uses GitHub's package registry as a deployment solution. If your project is using Maven, please follow the this [guide](https://help.github.com/en/articles/configuring-apache-maven-for-use-with-github-package-registry#installing-a-package).
-
-If your project is using Gradle, please follow the steps below:
-
-1. Create a system gradle.properties file in ~/.gradle/ and add the following properties:
-```
-mavenUser=GITHUB_USERNAME
-mavenPassword=PERSONAL_ACCESS_TOKEN
-```
-
-2. Add CHIWAVA's Maven repository
-```
-repositories {
-    maven {
-        credentials {
-            username "$mavenUser"
-            password "$mavenPassword"
-        }
-        url 'https://maven.pkg.github.com/nsftx/chiwava'
-    }
-}
+### Maven
+```xml
+<dependencies>
+    ...
+    <dependency>
+        <groupId>com.nsoft.chiwava</groupId>
+        <artifactId>chiwava-core-commons</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+    ...
+</dependencies>
 ```
 
-3. Install the needed CHIWAVA modules
-```
+### Gradle
+```groovy
 dependencies {
-    compile("com.nsoft.chiwava:chiwava-MODULE_NAME:VERSION")
+    ...
+    compile group: "com.nsoft.chiwava", name: "chiwava-core-commons", version: "1.0.0"
+    ...
 }
 ```
 
