@@ -16,6 +16,7 @@
 
     <name>CHIWAVA</name>
     <description>CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Java projects.</description>
+    <url>https://github.com/nsftx/nsoft-chiwava</url>
 
     <dependencies>
         <dependency>
@@ -83,6 +84,24 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphrase>${gpg.passphrase}</passphrase>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -110,8 +129,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
@@ -126,6 +144,12 @@
             <email>milicevic.mislav@nsoft.com</email>
         </developer>
     </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/nsftx/nsoft-chiwava.git</connection>
+        <developerConnection>scm:git:ssh://github.com:nsftx/nsoft-chiwava.git</developerConnection>
+        <url>https://github.com/nsftx/nsoft-chiwava</url>
+    </scm>
 
     <issueManagement>
         <system>Github</system>
