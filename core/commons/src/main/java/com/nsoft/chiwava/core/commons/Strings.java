@@ -239,4 +239,22 @@ public final class Strings {
         return res;
     }
 
+    /**
+     * Check is the input string contain only alphanumeric characters
+     *
+     * @param input String to be checked
+     * @return true or false depending on input
+     */
+    public static boolean isInputStringContainsOnlyAlphanumericCharacters(String input) {
+        Objects.requireNonNull(input, "Input can't be null");
+
+        for (char c : input.toCharArray()) {
+            if (!Character.isAlphanumeric(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
