@@ -2,10 +2,17 @@
 
 ## Making changes
 
-**All new changes must be made on the latest release branch**. If the latest release branch is `release/v1.0`, 
-you should make a checkout using `git checkout release/v1.0` and make the changes on that branch.  
+All new changes must be made on a separate branch that contains the latest changes from the `development` branch.
+
+#### Creating a new change branch
+1. `git checkout development`
+2. `git pull origin development`
+3. `git checkout -b MODULE_NAME/CHANGE_TYPE/CHANGE_NAME` where:
+    - `MODULE_NAME` is the name of the module you are making changes to 
+    - `CHANGE_TYPE` is either *feature* or *bugfix*
+    - `CHANGE_NAME` is a 2-3 underscore-separated word description of the change you are implementing. 
   
-After you're done, push the changes to your fork and create a pull request to the origin release branch.
+After you're done, push the changes to your fork and create a pull request to the origin `development` branch.
 
 ## Code style
 
