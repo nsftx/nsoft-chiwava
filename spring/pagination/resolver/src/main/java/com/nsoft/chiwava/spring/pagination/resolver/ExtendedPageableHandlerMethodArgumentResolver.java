@@ -29,9 +29,9 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Used to resolve pagination arguments in http requests
@@ -55,6 +55,12 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
 
     private static final int DEFAULT_SIZE = 10;
     private static final int DEFAULT_PAGE = 0;
+
+    private static final String LIMIT_PARAMETER = "limit";
+    private static final String OFFSET_PARAMETER = "offset";
+    private static final String PAGE_PARAMETER = "page";
+    private static final String SIZE_PARAMETER = "size";
+    private static final String SORT_PARAMETER = "sort";
 
     private Integer limit;
     private Integer offset;
@@ -103,61 +109,71 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
         size = null;
         sort = null;
 
-        if (request.getParameter("limit") != null
-                && !Objects.requireNonNull(request.getParameter("limit")).isBlank()) {
-            limit = Integer.parseInt(Objects.requireNonNull(request.getParameter("limit")));
+        if (request.getParameter(LIMIT_PARAMETER) != null
+                && !Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)).isBlank()) {
+            limit = Integer.parseInt(Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)));
         }
 
-        if (request.getParameter("offset") != null
-                && !Objects.requireNonNull(request.getParameter("offset")).isBlank()) {
-            offset = Integer.parseInt(Objects.requireNonNull(request.getParameter("offset")));
+        if (request.getParameter(OFFSET_PARAMETER) != null
+                && !Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)).isBlank()) {
+            offset = Integer
+                    .parseInt(Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)));
         }
 
-        if (request.getParameter("page") != null
-                && !Objects.requireNonNull(request.getParameter("page")).isBlank()) {
-            page = Integer.parseInt(Objects.requireNonNull(request.getParameter("page"))) - 1;
+        if (request.getParameter(PAGE_PARAMETER) != null
+                && !Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)).isBlank()) {
+            page = Integer.parseInt(Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)))
+                    - 1;
         }
 
-        if (request.getParameter("size") != null
-                && !Objects.requireNonNull(request.getParameter("size")).isBlank()) {
-            size = Integer.parseInt(Objects.requireNonNull(request.getParameter("size")));
+        if (request.getParameter(SIZE_PARAMETER) != null
+                && !Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)).isBlank()) {
+            size = Integer.parseInt(Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)));
         }
 
-        if (request.getParameterValues("sort") != null && Objects
-                .requireNonNull(request.getParameterValues("sort")).length != 0) {
-            String[] properties = request.getParameterValues("sort");
+        if (request.getParameterValues(SORT_PARAMETER) != null && Objects
+                .requireNonNull(request.getParameterValues(SORT_PARAMETER)).length != 0) {
+            sort = buildSort(request.getParameterValues(SORT_PARAMETER));
+        }
+    }
 
-            List<String> ascProperties = new ArrayList<>();
-            List<String> descProperties = new ArrayList<>();
+    private JpaSort buildSort(String[] properties) {
+        Set<String> ascProperties = new HashSet<>();
+        Set<String> descProperties = new HashSet<>();
 
-            for (String property : Objects.requireNonNull(properties)) {
-                property = property.trim();
+        JpaSort jpaSort = null;
 
-                Sort.Direction direction =
-                        property.startsWith("-") ? Direction.DESC : Direction.ASC;
+        for (String property : Objects.requireNonNull(properties)) {
+            property = property.trim();
 
-                if (property.startsWith("-") || property.startsWith("+")) {
-                    property = property.substring(1);
-                }
+            Sort.Direction direction =
+                    property.startsWith("-") ? Direction.DESC : Direction.ASC;
 
-                if (ascProperties.contains(property) || descProperties.contains(property)) {
+            property = property
+                    .substring((property.startsWith("-") || property.startsWith("+")) ? 1 : 0);
+
+            if (direction == Direction.ASC) {
+                if (descProperties.contains(property)) {
                     throw new InvalidPaginationParametersException(
                             "Can't sort by same parameter in multiple directions");
                 }
-
-                if (direction == Direction.ASC) {
-                    ascProperties.add(property);
-                } else {
-                    descProperties.add(property);
+                ascProperties.add(property);
+            } else {
+                if (ascProperties.contains(property)) {
+                    throw new InvalidPaginationParametersException(
+                            "Can't sort by same parameter in multiple directions");
                 }
+                descProperties.add(property);
+            }
 
-                if (sort == null) {
-                    sort = JpaSort.unsafe(direction, property);
-                } else {
-                    sort = sort.andUnsafe(direction, property);
-                }
+            if (jpaSort == null) {
+                jpaSort = JpaSort.unsafe(direction, property);
+            } else {
+                jpaSort = jpaSort.andUnsafe(direction, property);
             }
         }
+
+        return jpaSort;
     }
 
     private boolean hasLimitAndOffset() {

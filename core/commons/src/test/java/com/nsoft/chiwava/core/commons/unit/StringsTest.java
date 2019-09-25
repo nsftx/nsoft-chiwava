@@ -210,4 +210,13 @@ public class StringsTest {
     public void shouldNotGetNumberOfLowerCaseCharacters_NullInput() {
         Strings.getNumberOfLowerCaseCharacters(null);
     }
+
+    @Test
+    public void shouldBeAlphanumericOnly() {
+        String input = "AbCdE123";
+        Assert.assertTrue(Strings.isAlphanumericOnly(input));
+
+        input = "AbCdE123.-";
+        Assert.assertFalse(Strings.isAlphanumericOnly(input));
+    }
 }

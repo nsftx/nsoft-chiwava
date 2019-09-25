@@ -55,7 +55,7 @@ public class Source {
     @Getter
     private Integer row;
     @Getter
-    private Boolean snapshot;
+    private Object snapshot;
     @Getter
     private Integer thread;
     @Getter
@@ -68,7 +68,7 @@ public class Source {
             @JsonProperty("server_id") Long serverId, @JsonProperty("ts_sec") Long timestampSeconds,
             @JsonProperty("gtid") String gtid, @JsonProperty("file") String file,
             @JsonProperty("pos") Long position, @JsonProperty("row") Integer row,
-            @JsonProperty("snapshot") Boolean snapshot, @JsonProperty("thread") Integer thread,
+            @JsonProperty("snapshot") Object snapshot, @JsonProperty("thread") Integer thread,
             @JsonProperty("db") String db, @JsonProperty("table") String table) {
         this.version = version;
         this.name = name;
