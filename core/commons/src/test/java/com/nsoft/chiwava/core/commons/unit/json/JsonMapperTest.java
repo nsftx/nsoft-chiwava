@@ -8,7 +8,8 @@ import org.junit.Test;
 
 public class JsonMapperTest {
 
-    private static final JsonMapper DEFAULT_MAPPER = new JsonMapper();
+    private static final JsonMapper DEFAULT_MAPPER = new JsonMapper.Builder()
+            .allowCaseInsensitiveEnums(true).build();
 
     @Test
     public void shouldSerializePOJO() {
@@ -22,6 +23,13 @@ public class JsonMapperTest {
         POJO pojo = DEFAULT_MAPPER.fromJson(POJO.JSON, POJO.class);
 
         Assert.assertEquals(new POJO(), pojo);
+    }
+
+    @Test
+    public void shouldDeserializeWrongCasedEnum() {
+        EnumObject eo = DEFAULT_MAPPER.fromJson("\"hey\"", EnumObject.class);
+
+        Assert.assertEquals(EnumObject.HEY, eo);
     }
 
     @Getter
@@ -61,5 +69,10 @@ public class JsonMapperTest {
             result = 31 * result + (int) (temp ^ (temp >>> 32));
             return result;
         }
+    }
+
+    private enum EnumObject {
+        HEY,
+        THERE;
     }
 }
