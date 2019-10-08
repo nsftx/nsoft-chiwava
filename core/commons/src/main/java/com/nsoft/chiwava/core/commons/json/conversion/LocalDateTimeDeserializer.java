@@ -33,7 +33,11 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
 
     @Override
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(p.getLongValue()),
+        String unixTimestamp = p.getText().trim();
+        if (unixTimestamp.length() == 16) {
+            unixTimestamp = unixTimestamp.substring(0, unixTimestamp.length() - 3);
+        }
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.parseLong(unixTimestamp)),
                 TimeZone.getDefault().toZoneId());
     }
 }

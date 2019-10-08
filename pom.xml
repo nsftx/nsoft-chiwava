@@ -5,7 +5,7 @@
 
     <groupId>com.nsoft.chiwava</groupId>
     <artifactId>chiwava</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>pom</packaging>
 
     <name>CHIWAVA</name>
@@ -13,6 +13,26 @@
         CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
     </description>
     <url>https://github.com/nsftx/nsoft-chiwava</url>
+
+    <properties>
+        <maven.compiler.source>12</maven.compiler.source>
+        <maven.compiler.target>12</maven.compiler.target>
+
+        <junit.version>4.12</junit.version>
+        <lombok.version>1.18.10</lombok.version>
+        <jackson.version>2.9.9</jackson.version>
+        <spring.version>2.1.10.RELEASE</spring.version>
+        <spring.web.version>5.1.9.RELEASE</spring.web.version>
+    </properties>
+
+    <modules>
+        <module>core/commons</module>
+        <module>core/error</module>
+        <module>core/persistence</module>
+        <module>debezium/commons</module>
+        <module>spring/pagination/core</module>
+        <module>spring/pagination/resolver</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -24,11 +44,64 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
                 <configuration>
                     <excludes>
                         <exclude/>
@@ -38,7 +111,6 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>staging</serverId>
@@ -49,7 +121,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
                 <configuration>
                     <includes>
                         <include>org.codehaus.plexus:*</include>
@@ -71,7 +142,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -84,7 +154,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -97,7 +166,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -116,25 +184,6 @@
             </build>
         </profile>
     </profiles>
-
-    <modules>
-        <module>core/commons</module>
-        <module>core/error</module>
-        <module>core/persistence</module>
-        <module>debezium/commons</module>
-        <module>spring/pagination/core</module>
-        <module>spring/pagination/resolver</module>
-    </modules>
-
-    <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
-        <junit.version>4.12</junit.version>
-        <lombok.version>1.18.10</lombok.version>
-        <jackson.version>2.9.9</jackson.version>
-        <spring.version>2.1.10.RELEASE</spring.version>
-        <spring.web.version>5.1.9.RELEASE</spring.web.version>
-    </properties>
 
     <licenses>
         <license>

@@ -16,11 +16,12 @@
 
 package com.nsoft.chiwava.core.commons;
 
+import com.nsoft.chiwava.core.commons.regex.Patterns;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.IntUnaryOperator;
-import java.util.regex.Pattern;
 
 /**
  * Utility class used for various checks and manipulations of unique identifiers
@@ -29,9 +30,6 @@ import java.util.regex.Pattern;
  * @since 2019-08-16
  */
 public final class Identities {
-
-    private static final Pattern UUID_PATTERN = Pattern.compile(
-            "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
 
     private Identities() {
     }
@@ -188,7 +186,7 @@ public final class Identities {
      * @return if the input is in UUID form
      */
     public static boolean isUUID(String input) {
-        return UUID_PATTERN.matcher(Objects.requireNonNull(input, "Input can't be null")).matches();
+        return Patterns.isUUID(input);
     }
 
 }

@@ -19,6 +19,7 @@ package com.nsoft.chiwava.core.commons.json.conversion;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.nsoft.chiwava.core.commons.time.DateTimeFormats;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -31,8 +32,7 @@ import java.util.Objects;
  */
 public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-            .ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormats.UTC_ZULU;
 
     @Override
     public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers)
@@ -43,5 +43,9 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
     public void setFormat(String format) {
         dateTimeFormatter = DateTimeFormatter
                 .ofPattern(Objects.requireNonNull(format, "Format can't be null"));
+    }
+
+    public void setFormat(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }

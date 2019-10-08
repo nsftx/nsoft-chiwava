@@ -20,10 +20,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.nsoft.chiwava.core.commons.json.JsonMapper;
+import com.nsoft.chiwava.core.commons.json.conversion.LocalDateTimeDeserializer;
+import com.nsoft.chiwava.core.commons.json.conversion.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,7 +40,15 @@ import java.util.Optional;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DebeziumEvent {
 
-    private static final JsonMapper JSON_MAPPER = new JsonMapper();
+    private static final JsonMapper JSON_MAPPER;
+
+    static {
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
+
+        JSON_MAPPER = new JsonMapper.Builder().withModule(javaTimeModule).build();
+    }
 
     @Setter
     @Getter

@@ -18,6 +18,7 @@ package com.nsoft.chiwava.core.commons.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -121,6 +122,7 @@ public final class JsonMapper {
     public static class Builder {
 
         private final Set<Module> modules = new HashSet<>();
+        private boolean caseInsensitiveEnums = false;
 
         /**
          * Adds a module to the registration list
@@ -145,13 +147,30 @@ public final class JsonMapper {
         }
 
         /**
+         * Configures mapper to accept case insensitive enums
+         *
+         * @param value boolean value
+         * @return {@link Builder} instance
+         */
+        public Builder allowCaseInsensitiveEnums(boolean value) {
+            this.caseInsensitiveEnums = value;
+            return this;
+        }
+
+        /**
          * Builds the JsonMapper with the previously configured options
          *
          * @return built {@link JsonMapper}
          */
         public JsonMapper build() {
             ObjectMapper objectMapper = new ObjectMapper();
+
             modules.forEach(objectMapper::registerModule);
+
+            if (caseInsensitiveEnums) {
+                objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
+            }
+
             return new JsonMapper(objectMapper);
         }
     }
