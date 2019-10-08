@@ -131,8 +131,8 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
             size = Integer.parseInt(Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)));
         }
 
-        if (request.getParameterValues(SORT_PARAMETER) != null && Objects
-                .requireNonNull(request.getParameterValues(SORT_PARAMETER)).length != 0) {
+        if (request.getParameterValues(SORT_PARAMETER) != null && !isPropertiesArrayBlank(
+                request.getParameterValues(SORT_PARAMETER))) {
             sort = buildSort(request.getParameterValues(SORT_PARAMETER));
         }
     }
@@ -210,5 +210,12 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
 
     private boolean hasMixedStrategies() {
         return hasLimitOrOffset() && hasPageOrSize();
+    }
+
+    private boolean isPropertiesArrayBlank(String[] properties) {
+        if (properties == null) {
+            return true;
+        }
+        return properties.length == 1 && properties[0].isBlank();
     }
 }
