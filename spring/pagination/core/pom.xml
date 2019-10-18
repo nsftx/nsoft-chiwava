@@ -39,6 +39,5 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
     </dependencies>
 </project>

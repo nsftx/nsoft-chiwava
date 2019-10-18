@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.zalando</groupId>
             <artifactId>problem</artifactId>
-            <version>0.23.0</version>
+            <version>${zalando.version}</version>
         </dependency>
     </dependencies>
 </project>
