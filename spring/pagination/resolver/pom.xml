@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>com.nsoft.chiwava</groupId>
-        <artifactId>chiwava</artifactId>
+        <artifactId>chiwava-spring-pagination-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
