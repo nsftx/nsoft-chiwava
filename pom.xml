@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nsoft.chiwava</groupId>
-    <artifactId>chiwava</artifactId>
+    <artifactId>chiwava-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -15,8 +15,8 @@
     <url>https://github.com/nsftx/nsoft-chiwava</url>
 
     <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
 
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.10</lombok.version>
@@ -28,12 +28,9 @@
     </properties>
 
     <modules>
-        <module>core/commons</module>
-        <module>core/error</module>
-        <module>core/persistence</module>
-        <module>debezium/commons</module>
-        <module>spring/pagination/core</module>
-        <module>spring/pagination/resolver</module>
+        <module>core</module>
+        <module>debezium</module>
+        <module>spring</module>
     </modules>
 
     <dependencies>

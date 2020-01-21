@@ -62,7 +62,7 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
      */
     public static OffsetLimitPageRequest of(long offset, int limit, Sort.Direction direction,
             String... properties) {
-        return new OffsetLimitPageRequest(offset, limit, new Sort(direction, properties));
+        return new OffsetLimitPageRequest(offset, limit, Sort.by(direction, properties));
     }
 
     /**
