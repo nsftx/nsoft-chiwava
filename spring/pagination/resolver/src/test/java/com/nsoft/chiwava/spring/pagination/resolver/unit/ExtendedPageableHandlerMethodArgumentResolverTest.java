@@ -1,8 +1,9 @@
 package com.nsoft.chiwava.spring.pagination.resolver.unit;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import com.nsoft.chiwava.spring.pagination.resolver.ExtendedPageableHandlerMethodArgumentResolver;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.domain.JpaSort;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +22,6 @@ public class ExtendedPageableHandlerMethodArgumentResolverTest {
         method.setAccessible(true);
 
         JpaSort sort = (JpaSort) method.invoke(resolver, new Object[]{properties});
-        Assert.assertNotNull(sort);
+        assertNotNull(sort);
     }
 }

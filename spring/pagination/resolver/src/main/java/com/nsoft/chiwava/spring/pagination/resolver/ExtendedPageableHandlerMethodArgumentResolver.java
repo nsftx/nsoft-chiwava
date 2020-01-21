@@ -110,24 +110,24 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
         sort = null;
 
         if (request.getParameter(LIMIT_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)).isBlank()) {
+                && !Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)).isEmpty()) {
             limit = Integer.parseInt(Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)));
         }
 
         if (request.getParameter(OFFSET_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)).isBlank()) {
+                && !Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)).isEmpty()) {
             offset = Integer
                     .parseInt(Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)));
         }
 
         if (request.getParameter(PAGE_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)).isBlank()) {
+                && !Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)).isEmpty()) {
             page = Integer.parseInt(Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)))
                     - 1;
         }
 
         if (request.getParameter(SIZE_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)).isBlank()) {
+                && !Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)).isEmpty()) {
             size = Integer.parseInt(Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)));
         }
 
@@ -216,6 +216,6 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
         if (properties == null) {
             return true;
         }
-        return properties.length == 1 && properties[0].isBlank();
+        return properties.length == 1 && properties[0].isEmpty();
     }
 }

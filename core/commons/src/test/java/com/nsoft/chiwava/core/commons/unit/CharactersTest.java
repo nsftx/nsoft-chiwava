@@ -1,56 +1,58 @@
 package com.nsoft.chiwava.core.commons.unit;
 
-import com.nsoft.chiwava.core.commons.Characters;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CharactersTest {
+import com.nsoft.chiwava.core.commons.Characters;
+import org.junit.jupiter.api.Test;
+
+final class CharactersTest {
 
     @Test
-    public void shouldBeAlphanumeric() {
+    void shouldBeAlphanumeric() {
         for (char c = 'a'; c <= 'z'; c++) {
-            Assert.assertTrue(Characters.isAlphanumeric(c));
+            assertTrue(Characters.isAlphanumeric(c));
         }
 
         for (char c = 'A'; c <= 'Z'; c++) {
-            Assert.assertTrue(Characters.isAlphanumeric(c));
+            assertTrue(Characters.isAlphanumeric(c));
         }
 
         for (char c = '0'; c <= '9'; c++) {
-            Assert.assertTrue(Characters.isAlphanumeric(c));
+            assertTrue(Characters.isAlphanumeric(c));
         }
     }
 
     @Test
     public void shouldNotBeAlphanumeric() {
-        Assert.assertFalse(Characters.isAlphanumeric('.'));
+        assertFalse(Characters.isAlphanumeric('.'));
     }
 
     @Test
     public void shouldBeLetter() {
         for (char c = 'a'; c <= 'z'; c++) {
-            Assert.assertTrue(Characters.isLetter(c));
+            assertTrue(Characters.isLetter(c));
         }
 
         for (char c = 'A'; c <= 'Z'; c++) {
-            Assert.assertTrue(Characters.isLetter(c));
+            assertTrue(Characters.isLetter(c));
         }
     }
 
     @Test
     public void shouldNotBeLetter() {
-        Assert.assertFalse(Characters.isLetter('.'));
+        assertFalse(Characters.isLetter('.'));
     }
 
     @Test
     public void shouldBeDigit() {
         for (char c = '0'; c <= '9'; c++) {
-            Assert.assertTrue(Characters.isDigit(c));
+            assertTrue(Characters.isDigit(c));
         }
     }
 
     @Test
     public void shouldNotBeDigit() {
-        Assert.assertFalse(Characters.isDigit('.'));
+        assertFalse(Characters.isDigit('.'));
     }
 }

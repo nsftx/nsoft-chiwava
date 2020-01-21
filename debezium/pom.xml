@@ -18,4 +18,14 @@
     <modules>
         <module>commons</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.nsoft.chiwava</groupId>
+                <artifactId>chiwava-core-commons</artifactId>
+                <version>${chiwava.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

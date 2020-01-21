@@ -1,10 +1,11 @@
 package com.nsoft.chiwava.core.commons.unit.json;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.nsoft.chiwava.core.commons.json.JsonMapper;
 import lombok.Getter;
 import lombok.Setter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JsonMapperTest {
 
@@ -15,21 +16,21 @@ public class JsonMapperTest {
     public void shouldSerializePOJO() {
         String json = DEFAULT_MAPPER.toJson(new POJO());
 
-        Assert.assertEquals(POJO.JSON, json);
+        assertEquals(POJO.JSON, json);
     }
 
     @Test
     public void shouldDeserializePOJO() {
         POJO pojo = DEFAULT_MAPPER.fromJson(POJO.JSON, POJO.class);
 
-        Assert.assertEquals(new POJO(), pojo);
+        assertEquals(new POJO(), pojo);
     }
 
     @Test
     public void shouldDeserializeWrongCasedEnum() {
         EnumObject eo = DEFAULT_MAPPER.fromJson("\"hey\"", EnumObject.class);
 
-        Assert.assertEquals(EnumObject.HEY, eo);
+        assertEquals(EnumObject.HEY, eo);
     }
 
     @Getter

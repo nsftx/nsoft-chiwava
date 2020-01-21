@@ -1,8 +1,10 @@
 package com.nsoft.chiwava.core.commons.unit.regex;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.nsoft.chiwava.core.commons.regex.Patterns;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
@@ -10,23 +12,23 @@ public class PatternsTest {
 
     @Test
     public void shouldMatchUUID() {
-        Assert.assertTrue(Patterns.isUUID(UUID.randomUUID().toString()));
+        assertTrue(Patterns.isUUID(UUID.randomUUID().toString()));
     }
 
     @Test
     public void shouldNotMatchUUID() {
-        Assert.assertFalse(Patterns.isUUID("Random blob of text"));
+        assertFalse(Patterns.isUUID("Random blob of text"));
     }
 
     @Test
     public void shouldMatchEmail() {
         final String email = "example@example.com";
 
-        Assert.assertTrue(Patterns.isEmail(email));
+        assertTrue(Patterns.isEmail(email));
     }
 
     @Test
     public void shouldNotMatchEmail() {
-        Assert.assertFalse(Patterns.isEmail("Random blob of text"));
+        assertFalse(Patterns.isEmail("Random blob of text"));
     }
 }

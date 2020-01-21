@@ -1,8 +1,12 @@
 package com.nsoft.chiwava.core.commons.unit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.nsoft.chiwava.core.commons.Strings;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StringsTest {
 
@@ -10,177 +14,185 @@ public class StringsTest {
     public void shouldUpperCaseFirstCharacter() {
         String result = Strings.upperCaseFirst("input");
 
-        Assert.assertEquals("Input", result);
+        assertEquals("Input", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotUpperCaseFirstCharacter_NullInput() {
-        Strings.upperCaseFirst(null);
+        assertThrows(NullPointerException.class, () -> Strings.upperCaseFirst(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotUpperCaseFirstCharacter_InvalidIndexLower() {
-        Strings.upperCaseFirst("input", 0);
+        assertThrows(IllegalArgumentException.class, () -> Strings.upperCaseFirst("input", 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotUpperCaseFirstCharacter_InvalidIndexHigher() {
-        Strings.upperCaseFirst("input", "input".length() + 1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.upperCaseFirst("input", "input".length() + 1));
     }
 
     @Test
     public void shouldUpperCaseFirstTwoCharacters() {
         String result = Strings.upperCaseFirst("input", 2);
 
-        Assert.assertEquals("INput", result);
+        assertEquals("INput", result);
     }
 
     @Test
     public void shouldUpperCaseLastCharacter() {
         String result = Strings.upperCaseLast("input");
 
-        Assert.assertEquals("inpuT", result);
+        assertEquals("inpuT", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotUpperCaseLastCharacter_NullInput() {
-        Strings.upperCaseLast(null);
+        assertThrows(NullPointerException.class, () -> Strings.upperCaseLast(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotUpperCaseLastCharacter_InvalidIndexLower() {
-        Strings.upperCaseLast("input", 0);
+        assertThrows(IllegalArgumentException.class, () -> Strings.upperCaseLast("input", 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotUpperCaseLastCharacter_InvalidIndexUpper() {
-        Strings.upperCaseLast("input", "input".length() + 1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.upperCaseLast("input", "input".length() + 1));
     }
 
     @Test
     public void shouldUpperCaseLastTwoCharacters() {
         String result = Strings.upperCaseLast("input", 2);
 
-        Assert.assertEquals("inpUT", result);
+        assertEquals("inpUT", result);
     }
 
     @Test
     public void shouldLowerCaseFirstCharacter() {
         String result = Strings.lowerCaseFirst("INPUT");
 
-        Assert.assertEquals("iNPUT", result);
+        assertEquals("iNPUT", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotLowerCaseFirstCharacter_NullInput() {
-        Strings.lowerCaseFirst(null);
+        assertThrows(NullPointerException.class, () -> Strings.lowerCaseFirst(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotLowerCaseFirstCharacter_InvalidIndexLower() {
-        Strings.lowerCaseFirst("INPUT", 0);
+        assertThrows(IllegalArgumentException.class, () -> Strings.lowerCaseFirst("INPUT", 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotLowerCaseFirstCharacter_InvalidIndexHigher() {
-        Strings.lowerCaseFirst("INPUT", "INPUT".length() + 1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.lowerCaseFirst("INPUT", "INPUT".length() + 1));
     }
 
     @Test
     public void shouldLowerCaseFirstTwoCharacters() {
         String result = Strings.lowerCaseFirst("INPUT", 2);
 
-        Assert.assertEquals("inPUT", result);
+        assertEquals("inPUT", result);
     }
 
     @Test
     public void shouldLowerCaseLastCharacter() {
         String result = Strings.lowerCaseLast("INPUT");
 
-        Assert.assertEquals("INPUt", result);
+        assertEquals("INPUt", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotLowerCaseLastCharacter_NullInput() {
-        Strings.lowerCaseLast(null);
+        assertThrows(NullPointerException.class, () -> Strings.lowerCaseLast(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotLowerCaseLastCharacter_InvalidIndexLower() {
-        Strings.lowerCaseLast("INPUT", 0);
+        assertThrows(IllegalArgumentException.class, () -> Strings.lowerCaseLast("INPUT", 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotLowerCaseLastCharacter_InvalidIndexUpper() {
-        Strings.lowerCaseLast("INPUT", "INPUT".length() + 1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.lowerCaseLast("INPUT", "INPUT".length() + 1));
     }
 
     @Test
     public void shouldLowerCaseLastTwoCharacters() {
         String result = Strings.lowerCaseLast("INPUT", 2);
 
-        Assert.assertEquals("INPut", result);
+        assertEquals("INPut", result);
     }
 
     @Test
     public void shouldInsertCharacter() {
         String result = Strings.insertCharacterAt("input", 'm', 1);
 
-        Assert.assertEquals("imnput", result);
+        assertEquals("imnput", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotInsertCharacter_NullInput() {
-        Strings.insertCharacterAt(null, 'm', 1);
+        assertThrows(NullPointerException.class, () -> Strings.insertCharacterAt(null, 'm', 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotInsertCharacter_InvalidIndexLower() {
-        Strings.insertCharacterAt("input", 'm', -1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.insertCharacterAt("input", 'm', -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotInsertCharacter_InvalidIndexUpper() {
-        Strings.insertCharacterAt("input", 'm', "input".length());
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.insertCharacterAt("input", 'm', "input".length()));
     }
 
     @Test
     public void shouldInsertString() {
         String result = Strings.insertStringAt("input", "put", 2);
 
-        Assert.assertEquals("inputput", result);
+        assertEquals("inputput", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotInsertString_NullInput() {
-        Strings.insertStringAt(null, "put", 2);
+        assertThrows(NullPointerException.class, () -> Strings.insertStringAt(null, "put", 2));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotInsertString_NullInsert() {
-        Strings.insertStringAt("input", null, 2);
+        assertThrows(NullPointerException.class, () -> Strings.insertStringAt("input", null, 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotInsertString_InvalidIndexLower() {
-        Strings.insertStringAt("input", "put", -1);
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.insertStringAt("input", "put", -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotInsertString_InvalidIndexUpper() {
-        Strings.insertStringAt("input", "put", "input".length());
+        assertThrows(IllegalArgumentException.class,
+                () -> Strings.insertStringAt("input", "put", "input".length()));
     }
 
     @Test
     public void shouldReverse() {
         String result = Strings.reverse("input");
 
-        Assert.assertEquals("tupni", result);
+        assertEquals("tupni", result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotReverse_NullInput() {
-        Strings.reverse(null);
+        assertThrows(NullPointerException.class, () -> Strings.reverse(null));
     }
 
     @Test
@@ -189,12 +201,13 @@ public class StringsTest {
 
         int num = Strings.getNumberOfUpperCaseCharacters(input);
 
-        Assert.assertEquals(2, num);
+        assertEquals(2, num);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotGetNumberOfUpperCaseCharacters_NullInput() {
-        Strings.getNumberOfUpperCaseCharacters(null);
+        assertThrows(NullPointerException.class,
+                () -> Strings.getNumberOfUpperCaseCharacters(null));
     }
 
     @Test
@@ -203,20 +216,21 @@ public class StringsTest {
 
         int num = Strings.getNumberOfLowerCaseCharacters(input);
 
-        Assert.assertEquals(3, num);
+        assertEquals(3, num);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNotGetNumberOfLowerCaseCharacters_NullInput() {
-        Strings.getNumberOfLowerCaseCharacters(null);
+        assertThrows(NullPointerException.class,
+                () -> Strings.getNumberOfLowerCaseCharacters(null));
     }
 
     @Test
     public void shouldBeAlphanumericOnly() {
         String input = "AbCdE123";
-        Assert.assertTrue(Strings.isAlphanumericOnly(input));
+        assertTrue(Strings.isAlphanumericOnly(input));
 
         input = "AbCdE123.-";
-        Assert.assertFalse(Strings.isAlphanumericOnly(input));
+        assertFalse(Strings.isAlphanumericOnly(input));
     }
 }
