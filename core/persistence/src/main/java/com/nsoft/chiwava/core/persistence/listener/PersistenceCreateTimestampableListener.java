@@ -19,17 +19,15 @@ package com.nsoft.chiwava.core.persistence.listener;
 import com.nsoft.chiwava.core.persistence.PersistenceTimestampable;
 
 import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 /**
  * Used with {@link javax.persistence.EntityListeners} to timestamp entities when they are created
- * and updated
  *
  * @author Mislav Milicevic
- * @since 2019-09-06
+ * @since 2019-01-22
  */
-public class PersistenceTimestampableListener {
+public class PersistenceCreateTimestampableListener {
 
     @PrePersist
     public void prePersist(PersistenceTimestampable persistenceTimestampable) {
@@ -38,11 +36,6 @@ public class PersistenceTimestampableListener {
         if (persistenceTimestampable.getUpdatedAt() == null) {
             persistenceTimestampable.setUpdatedAt(LocalDateTime.now());
         }
-    }
-
-    @PreUpdate
-    public void preUpdate(PersistenceTimestampable persistenceTimestampable) {
-        persistenceTimestampable.setUpdatedAt(LocalDateTime.now());
     }
 
 }

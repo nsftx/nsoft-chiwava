@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,20 @@
 
 package com.nsoft.chiwava.core.persistence;
 
+import java.time.LocalDateTime;
+
 /**
- * Used as a pre-persistence layer to timestamp entities when they are created and updated
- *
+ * Used as a pre-persistence layer to timestamp entities when they are created
+ * <p>
  * The implementing class needs be annotated with {@link javax.persistence.EntityListeners} with
- * {@link com.nsoft.chiwava.core.persistence.listener.PersistenceTimestampableListener} as an
+ * {@link com.nsoft.chiwava.core.persistence.listener.PersistenceCreateTimestampableListener} as an
  * argument to enable pre-persist timestamping
  *
  * <pre>
  *     &#64;Entity
- *     &#64;EntityListeners(PersistenceTimestampableListener.class)
+ *     &#64;EntityListeners(PersistenceCreateTimestampableListener.class)
  *     &#64;Getter
- *     public class SimpleEntity implements PersistenceTimestampable {
+ *     public class SimpleEntity implements PersistenceCreateTimestampable {
  *
  *          &#64;Id
  *          &#64;GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,17 +40,17 @@ package com.nsoft.chiwava.core.persistence;
  *          &#64;Setter
  *          private LocalDateTime createdAt;
  *
- *          &#64;Column(name = "updated_at", nullable = false)
- *          &#64;Setter
- *          private LocalDateTime updatedAt;
- *
  *          public SimpleEntity() {
  *          }
  *     }
  * </pre>
  *
  * @author Mislav Milicevic
- * @since 2019-09-06
+ * @since 2019-01-22
  */
-public interface PersistenceTimestampable extends PersistenceCreateTimestampable, PersistenceUpdateTimestampable {
+public interface PersistenceCreateTimestampable {
+
+    LocalDateTime getCreatedAt();
+
+    void setCreatedAt(final LocalDateTime localDateTime);
 }
