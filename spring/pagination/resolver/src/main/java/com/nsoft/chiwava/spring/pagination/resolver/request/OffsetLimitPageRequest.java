@@ -30,8 +30,6 @@ import java.util.Objects;
  */
 public class OffsetLimitPageRequest implements Pageable, Serializable {
 
-    private static final long serialVersionUID = 5761669087831551553L;
-
     private long offset;
     private int limit;
     private final Sort sort;
@@ -52,6 +50,7 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
         if (limit < 1) {
             throw new InvalidPaginationParametersException("Limit must not be less than one!");
         }
+
         this.limit = limit;
         this.offset = offset;
         this.sort = sort;
