@@ -17,6 +17,7 @@
 package com.nsoft.chiwava.spring.pagination.resolver.request;
 
 import com.nsoft.chiwava.spring.pagination.resolver.exception.InvalidPaginationParametersException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
@@ -38,9 +39,9 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
     /**
      * Creates a new {@link OffsetLimitPageRequest} with sort parameters applied.
      *
-     * @param offset zero-based offset.
-     * @param limit the size of the elements to be returned.
-     * @param sort can be {@literal null}.
+     * @param offset zero-based offset
+     * @param limit the size of the elements to be returned
+     * @param sort can be {@code null}
      */
     private OffsetLimitPageRequest(long offset, int limit, Sort sort) {
         if (offset < 0) {
@@ -59,10 +60,11 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
     /**
      * Creates a new {@link OffsetLimitPageRequest} with sort parameters applied.
      *
-     * @param offset zero-based offset.
-     * @param limit the size of the elements to be returned.
-     * @param direction the direction of the {@link Sort} to be specified, can be {@literal null}.
-     * @param properties the properties to sort by, must not be {@literal null} or empty.
+     * @param offset zero-based offset
+     * @param limit the size of the elements to be returned
+     * @param direction the direction of the {@link Sort} to be specified, can be {@literal null}
+     * @param properties the properties to sort by, must not be {@literal null} or empty
+     * @return {@link OffsetLimitPageRequest} instance
      */
     public static OffsetLimitPageRequest of(long offset, int limit, Sort.Direction direction,
             String... properties) {
@@ -72,9 +74,10 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
     /**
      * Creates a new {@link OffsetLimitPageRequest} with sort parameters applied.
      *
-     * @param offset zero-based offset.
-     * @param limit the size of the elements to be returned.
-     * @param sort sort object.
+     * @param offset zero-based offset
+     * @param limit the size of the elements to be returned
+     * @param sort sort object
+     * @return {@link OffsetLimitPageRequest} instance
      */
     public static OffsetLimitPageRequest of(long offset, int limit, Sort sort) {
         return new OffsetLimitPageRequest(offset, limit, sort);
@@ -83,54 +86,84 @@ public class OffsetLimitPageRequest implements Pageable, Serializable {
     /**
      * Creates a new {@link OffsetLimitPageRequest} with sort parameters applied.
      *
-     * @param offset zero-based offset.
-     * @param limit the size of the elements to be returned.
+     * @param offset zero-based offset
+     * @param limit the size of the elements to be returned
+     * @return {@link OffsetLimitPageRequest} instance
      */
     public static OffsetLimitPageRequest of(long offset, int limit) {
         return new OffsetLimitPageRequest(offset, limit, Sort.unsorted());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPageNumber() {
         return (int) (offset / limit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPageSize() {
         return limit;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long getOffset() {
         return offset;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sort getSort() {
         return sort;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pageable next() {
         return new OffsetLimitPageRequest(getOffset() + getPageSize(), getPageSize(), getSort());
     }
 
+    /**
+     * Returns the {@link Pageable} requesting the previous {@link Page}.
+     *
+     * @return {@link Pageable} requesting the previous {@link Page}
+     */
     public OffsetLimitPageRequest previous() {
         return hasPrevious()
                 ? new OffsetLimitPageRequest(getOffset() - getPageSize(), getPageSize(), getSort())
                 : this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pageable previousOrFirst() {
         return hasPrevious() ? previous() : first();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pageable first() {
         return new OffsetLimitPageRequest(0, getPageSize(), getSort());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasPrevious() {
         return offset > limit;

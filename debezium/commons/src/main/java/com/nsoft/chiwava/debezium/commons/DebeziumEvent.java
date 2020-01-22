@@ -91,6 +91,7 @@ public class DebeziumEvent {
     /**
      * Constructs the after state of the event
      *
+     * @param <T> event model
      * @param clazz model class
      * @return constructed after state
      */
@@ -105,6 +106,7 @@ public class DebeziumEvent {
     /**
      * Constructs the before state of the event
      *
+     * @param <T> event model
      * @param clazz model class
      * @return constructed before state
      */
