@@ -46,7 +46,7 @@ import java.time.LocalDateTime;
  * </pre>
  *
  * @author Mislav Milicevic
- * @since 2019-01-22
+ * @since 2020-01-22
  */
 public interface PersistenceCreateTimestampable {
 

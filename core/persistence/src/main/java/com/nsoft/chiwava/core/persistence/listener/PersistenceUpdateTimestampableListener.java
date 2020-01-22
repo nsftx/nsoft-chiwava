@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
  * Used with {@link javax.persistence.EntityListeners} to timestamp entities when they are updated
  *
  * @author Mislav Milicevic
- * @since 2019-01-22
+ * @since 2020-01-22
  */
 public class PersistenceUpdateTimestampableListener {
 
