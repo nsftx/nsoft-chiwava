@@ -75,7 +75,7 @@ public final class Identities {
         }
 
         for (char c : input.toCharArray()) {
-            if (!Characters.isAlphanumeric(c)) {
+            if (isNotCharacterAlphanumeric(c)) {
                 throw new IllegalArgumentException(
                         String.format("Illegal character {found: %s}", c));
             }
@@ -116,7 +116,7 @@ public final class Identities {
         int hyphenCount = 0;
 
         for (char c : input.toCharArray()) {
-            if (!Characters.isAlphanumeric(c)) {
+            if (isNotCharacterAlphanumeric(c)) {
                 if (c == '-') {
                     if (hyphenCount > 4) {
                         throw new IllegalArgumentException("Too many hyphens");
@@ -187,6 +187,10 @@ public final class Identities {
      */
     public static boolean isUUID(String input) {
         return Patterns.isUUID(input);
+    }
+
+    private static boolean isNotCharacterAlphanumeric(char c) {
+        return (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9');
     }
 
 }
