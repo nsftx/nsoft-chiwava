@@ -20,6 +20,10 @@ import com.nsoft.chiwava.core.error.AbstractError;
 import com.nsoft.chiwava.core.error.Title;
 import org.zalando.problem.Status;
 
+/**
+ * @author Mislav Milicevic
+ * @since 2019-09-06
+ */
 public class InvalidPaginationParametersException extends AbstractError {
 
     private static final Title EXCEPTION_TITLE = new Title() {

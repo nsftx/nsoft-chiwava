@@ -23,6 +23,10 @@ import org.springframework.data.domain.Sort;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author Nikola Rakic
+ * @since 2019-09-06
+ */
 public class OffsetLimitPageRequest implements Pageable, Serializable {
 
     private static final long serialVersionUID = 5761669087831551553L;
