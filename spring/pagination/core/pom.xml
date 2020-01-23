@@ -24,11 +24,11 @@
     <parent>
         <groupId>com.nsoft.chiwava</groupId>
         <artifactId>chiwava-spring-pagination-parent</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
+        <version>2.0.0.RC1</version>
     </parent>
 
     <artifactId>chiwava-spring-pagination-core</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0.RC1</version>
     <packaging>jar</packaging>
 
     <name>CHIWAVA - Spring - Pagination - Core</name>
