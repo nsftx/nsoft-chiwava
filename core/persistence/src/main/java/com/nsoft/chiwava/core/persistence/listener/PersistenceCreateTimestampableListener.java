@@ -16,7 +16,7 @@
 
 package com.nsoft.chiwava.core.persistence.listener;
 
-import com.nsoft.chiwava.core.persistence.PersistenceTimestampable;
+import com.nsoft.chiwava.core.persistence.PersistenceCreateTimestampable;
 
 import javax.persistence.PrePersist;
 import java.time.LocalDateTime;
@@ -30,12 +30,9 @@ import java.time.LocalDateTime;
 public class PersistenceCreateTimestampableListener {
 
     @PrePersist
-    public void prePersist(PersistenceTimestampable persistenceTimestampable) {
-        if (persistenceTimestampable.getCreatedAt() == null)
-            persistenceTimestampable.setCreatedAt(LocalDateTime.now());
-        if (persistenceTimestampable.getUpdatedAt() == null) {
-            persistenceTimestampable.setUpdatedAt(LocalDateTime.now());
-        }
+    public void prePersist(PersistenceCreateTimestampable timestampable) {
+        if (timestampable.getCreatedAt() == null)
+            timestampable.setCreatedAt(LocalDateTime.now());
     }
 
 }
