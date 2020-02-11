@@ -1,4 +1,5 @@
-# CHIWAVA
+# CHIWAVA [![Maven Version](https://maven-badges.herokuapp.com/maven-central/com.nsoft.chiwava/chiwava-parent/badge.svg)](https://mvnrepository.com/artifact/com.nsoft.chiwava)
+
 
 CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
 
