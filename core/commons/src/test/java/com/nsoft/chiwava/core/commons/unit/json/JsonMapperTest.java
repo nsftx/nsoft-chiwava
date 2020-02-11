@@ -17,6 +17,7 @@
 package com.nsoft.chiwava.core.commons.unit.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.nsoft.chiwava.core.commons.json.JsonMapper;
@@ -24,36 +25,47 @@ import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Test;
 
-public class JsonMapperTest {
-
-    private static final JsonMapper DEFAULT_MAPPER = new JsonMapper.Builder()
-            .withFeature(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS).build();
+final class JsonMapperTest {
 
     @Test
-    public void shouldSerializePOJO() {
-        String json = DEFAULT_MAPPER.toJson(new POJO());
+    void shouldSerializePOJO() {
+        final JsonMapper mapper = new JsonMapper();
 
-        assertEquals(POJO.JSON, json);
+        String json = mapper.toJson(new POJO());
+
+        assertEquals(POJO.PREDEFINED_JSON, json);
     }
 
     @Test
-    public void shouldDeserializePOJO() {
-        POJO pojo = DEFAULT_MAPPER.fromJson(POJO.JSON, POJO.class);
+    void shouldDeserializePOJO() {
+        final JsonMapper mapper = new JsonMapper();
+
+        POJO pojo = mapper.fromJson(POJO.PREDEFINED_JSON, POJO.class);
 
         assertEquals(new POJO(), pojo);
     }
 
     @Test
-    public void shouldDeserializeWrongCasedEnum() {
-        EnumObject eo = DEFAULT_MAPPER.fromJson("\"hey\"", EnumObject.class);
+    void shouldDeserializeWrongCasedEnum() {
+        final JsonMapper mapper = new JsonMapper.Builder()
+                .withFeature(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS).build();
+
+        EnumObject eo = mapper.fromJson("\"hey\"", EnumObject.class);
 
         assertEquals(EnumObject.HEY, eo);
+    }
+
+    @Test
+    void complex() {
+        final JsonMapper mapper = new JsonMapper();
+
+        assertNotNull(mapper.complex());
     }
 
     @Getter
     @Setter
     private static class POJO {
-        public static final String JSON = "{\"value1\":\"1\",\"value2\":2,\"value3\":3,\"value4\":4.0,\"value5\":5.0}";
+        public static final String PREDEFINED_JSON = "{\"value1\":\"1\",\"value2\":2,\"value3\":3,\"value4\":4.0,\"value5\":5.0}";
 
         private String value1 = "1";
         private int value2 = 2;

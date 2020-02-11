@@ -118,6 +118,10 @@ public final class JsonMapper {
         return obj;
     }
 
+    public ObjectMapper complex() {
+        return objectMapper;
+    }
+
     /**
      * Internal Builder class used to configure the JsonMapper before usage
      *
