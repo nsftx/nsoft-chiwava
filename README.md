@@ -1,4 +1,4 @@
-# CHIWAVA ![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fcom%2Fnsoft%2Fchiwava%2Fchiwava-parent%2Fmaven-metadata.xml&style=for-the-badge) ![GitHub](https://img.shields.io/github/license/nsftx/nsoft-chiwava?style=for-the-badge)
+# CHIWAVA [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fcom%2Fnsoft%2Fchiwava%2Fchiwava-parent%2Fmaven-metadata.xml&style=for-the-badge)](https://search.maven.org/search?q=g:com.nsoft.chiwava) [![GitHub](https://img.shields.io/github/license/nsftx/nsoft-chiwava?style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
 
 CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
 
