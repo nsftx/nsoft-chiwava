@@ -33,8 +33,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Simple wrapper for Jackson's Object Mapper
+ * A wrapper for Jackson's Object Mapper meant to provide simple JSON serialization/deserialization
+ * capabilities. If more advance features are required, invoking {@link #complex()} will return a
+ * raw Jackson {@link ObjectMapper} with full functionality.
  *
+ * Examples:
  * <pre>
  *     final JsonMapper jsonMapper = new JsonMapper();
  *     or
@@ -118,12 +121,17 @@ public final class JsonMapper {
         return obj;
     }
 
+    /**
+     * Returns the raw Jackson {@link ObjectMapper} instance
+     *
+     * @return raw Jackson {@link ObjectMapper} instance
+     */
     public ObjectMapper complex() {
         return objectMapper;
     }
 
     /**
-     * Internal Builder class used to configure the JsonMapper before usage
+     * Internal {@link Builder} class used to configure the {@link JsonMapper} instance
      *
      * @author Mislav Milicevic
      * @since 2019-09-04
