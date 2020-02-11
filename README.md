@@ -1,5 +1,4 @@
-# CHIWAVA [![Maven Version](https://maven-badges.herokuapp.com/maven-central/com.nsoft.chiwava/chiwava-parent/badge.svg)](https://mvnrepository.com/artifact/com.nsoft.chiwava)
-
+# CHIWAVA ![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fcom%2Fnsoft%2Fchiwava%2Fchiwava-parent%2Fmaven-metadata.xml&style=for-the-badge) ![GitHub](https://img.shields.io/github/license/nsftx/nsoft-chiwava?style=for-the-badge)
 
 CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used in Spring based Java projects.
 
@@ -12,7 +11,7 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
     <dependency>
         <groupId>com.nsoft.chiwava</groupId>
         <artifactId>chiwava-core-commons</artifactId>
-        <version>2.0.0.RC1</version>
+        <version>2.0.0.RC3</version>
     </dependency>
     ...
 </dependencies>
@@ -22,18 +21,18 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
 ```groovy
 dependencies {
     ...
-    compile group: "com.nsoft.chiwava", name: "chiwava-core-commons", version: "2.0.0.RC1"
+    compile group: "com.nsoft.chiwava", name: "chiwava-core-commons", version: "2.0.0.RC3"
     ...
 }
 ```
 
 ### Available modules
-- chiwava-core-commons:2.0.0.RC1
-- chiwava-core-error:2.0.0.RC1
-- chiwava-core-persistence:2.0.0.RC1
-- chiwava-debezium-commons:2.0.0.RC1
-- chiwava-spring-pagination-core:2.0.0.RC1
-- chiwava-spring-pagination-resolver:2.0.0.RC1
+- chiwava-core-commons:2.0.0.RC3
+- chiwava-core-error:2.0.0.RC3
+- chiwava-core-persistence:2.0.0.RC3
+- chiwava-debezium-commons:2.0.0.RC3
+- chiwava-spring-pagination-core:2.0.0.RC3
+- chiwava-spring-pagination-resolver:2.0.0.RC3
 
 ## License
 This project is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0)
