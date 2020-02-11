@@ -18,17 +18,22 @@ package com.nsoft.chiwava.core.commons.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.cfg.ConfigFeature;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
- * Simple wrapper of Jackson's Object Mapper
+ * Simple wrapper for Jackson's Object Mapper
  *
  * <pre>
  *     final JsonMapper jsonMapper = new JsonMapper();
@@ -122,13 +127,19 @@ public final class JsonMapper {
     public static class Builder {
 
         private final Set<Module> modules = new HashSet<>();
-        private boolean caseInsensitiveEnums = false;
+
+        private final Map<MapperFeature, Boolean> mapperFeatures = new EnumMap<>(
+                MapperFeature.class);
+        private final Map<SerializationFeature, Boolean> serializationFeatures = new EnumMap<>(
+                SerializationFeature.class);
+        private final Map<DeserializationFeature, Boolean> deserializationFeatures = new EnumMap<>(
+                DeserializationFeature.class);
 
         /**
-         * Adds a module to the registration list
+         * Marks a module to be registered and returns the current {@link Builder} instance.
          *
          * @param module {@link Module} to register
-         * @return {@link Builder} instance
+         * @return current {@link Builder} instance
          */
         public Builder withModule(Module module) {
             modules.add(module);
@@ -136,13 +147,58 @@ public final class JsonMapper {
         }
 
         /**
-         * Adds multiple modules to the registration list
+         * Marks multiple modules to be registered and returns the current {@link Builder
+         * instance}.
          *
          * @param moduleList list of modules to register
-         * @return {@link Builder} instance
+         * @return current {@link Builder} instance
          */
         public Builder withModules(Module... moduleList) {
             modules.addAll(Arrays.asList(moduleList));
+            return this;
+        }
+
+        /**
+         * Marks a feature to be enabled and returns the current {@link Builder} instance.
+         *
+         * @param feature {@link ConfigFeature} to enable
+         * @return current {@link Builder} instance
+         */
+        public Builder withFeature(ConfigFeature feature) {
+            enableFeature(feature);
+            return this;
+        }
+
+        /**
+         * Marks multiple features to be enabled and returns the current {@link Builder} instance.
+         *
+         * @param features {@link ConfigFeature} to enable
+         * @return current {@link Builder} instance
+         */
+        public Builder withFeatures(ConfigFeature... features) {
+            Arrays.asList(features).forEach(this::enableFeature);
+            return this;
+        }
+
+        /**
+         * Marks a feature to be disabled and returns the current {@link Builder} instance.
+         *
+         * @param feature {@link ConfigFeature} to enable
+         * @return current {@link Builder} instance
+         */
+        public Builder withoutFeature(ConfigFeature feature) {
+            disableFeature(feature);
+            return this;
+        }
+
+        /**
+         * Marks multiple features to be disabled and returns the current {@link Builder} instance.
+         *
+         * @param features {@link ConfigFeature} to enable
+         * @return current {@link Builder} instance
+         */
+        public Builder withoutFeatures(ConfigFeature... features) {
+            Arrays.asList(features).forEach(this::disableFeature);
             return this;
         }
 
@@ -151,10 +207,12 @@ public final class JsonMapper {
          *
          * @param value boolean value
          * @return {@link Builder} instance
+         * @deprecated use {@link #withFeature} to enable the feature
          */
+        @Deprecated
         public Builder allowCaseInsensitiveEnums(boolean value) {
-            this.caseInsensitiveEnums = value;
-            return this;
+            return value ? withFeature(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+                    : withoutFeature(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
         }
 
         /**
@@ -165,13 +223,33 @@ public final class JsonMapper {
         public JsonMapper build() {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            modules.forEach(objectMapper::registerModule);
+            objectMapper.registerModules(modules);
 
-            if (caseInsensitiveEnums) {
-                objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
-            }
+            mapperFeatures.forEach(objectMapper::configure);
+            serializationFeatures.forEach(objectMapper::configure);
+            deserializationFeatures.forEach(objectMapper::configure);
 
             return new JsonMapper(objectMapper);
+        }
+
+        private void enableFeature(ConfigFeature feature) {
+            enableFeature(feature, true);
+        }
+
+        private void disableFeature(ConfigFeature feature) {
+            enableFeature(feature, false);
+        }
+
+        private void enableFeature(ConfigFeature feature, boolean enable) {
+            if (feature instanceof MapperFeature) {
+                mapperFeatures.put((MapperFeature) feature, enable);
+            } else if (feature instanceof SerializationFeature) {
+                serializationFeatures.put((SerializationFeature) feature, enable);
+            } else if (feature instanceof DeserializationFeature) {
+                deserializationFeatures.put((DeserializationFeature) feature, enable);
+            } else {
+                throw new IllegalArgumentException();
+            }
         }
     }
 

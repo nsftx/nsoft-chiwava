@@ -18,6 +18,7 @@ package com.nsoft.chiwava.core.commons.unit.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.nsoft.chiwava.core.commons.json.JsonMapper;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,7 @@ import org.junit.jupiter.api.Test;
 public class JsonMapperTest {
 
     private static final JsonMapper DEFAULT_MAPPER = new JsonMapper.Builder()
-            .allowCaseInsensitiveEnums(true).build();
+            .withFeature(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS).build();
 
     @Test
     public void shouldSerializePOJO() {
