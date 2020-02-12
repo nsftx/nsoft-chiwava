@@ -42,7 +42,7 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
     public void setFormat(String format) {
         dateTimeFormatter = DateTimeFormatter
-                .ofPattern(Objects.requireNonNull(format, "Format can't be null"));
+                .ofPattern(Objects.requireNonNull(format, "format can't be null"));
     }
 
     public void setFormat(DateTimeFormatter dateTimeFormatter) {

@@ -62,7 +62,7 @@ public final class Identities {
      * @return reconstructed UUID
      */
     public static String reconstructStrippedUUID(String input) {
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         if (isUUID(input)) {
             return input;
@@ -101,7 +101,7 @@ public final class Identities {
      * @return reconstructed UUID
      */
     public static String reconstructDamagedUUID(String input) {
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         if (isUUID(input)) {
             return input;

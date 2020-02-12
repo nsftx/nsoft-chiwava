@@ -58,8 +58,8 @@ public class Patterns {
     }
 
     private static boolean matchesPattern(Pattern pattern, CharSequence input) {
-        Objects.requireNonNull(pattern, "Pattern can't be null");
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(pattern, "pattern can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         return pattern.matcher(input).matches();
     }
