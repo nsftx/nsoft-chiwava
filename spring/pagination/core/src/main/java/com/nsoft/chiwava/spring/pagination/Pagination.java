@@ -16,35 +16,47 @@
 
 package com.nsoft.chiwava.spring.pagination;
 
+import static java.util.Objects.requireNonNull;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.domain.Page;
 
 /**
- * Pagination representation
+ * A metadata object used to provide additional information about the pagination configuration used
+ * by a data set. If a data set is paginated, it is expected that a {@link Pagination} object is
+ * present in the result set in order to provide additional context.
  *
  * @author Mislav Milicevic
  * @since 2019-09-06
  */
 @Getter
-@Setter
+@AllArgsConstructor
 public final class Pagination {
 
-    private Integer page;
-    private Integer size;
-    private Long offset;
-    private Integer limit;
-    private Long total;
-    private Integer pages;
+    private final Integer size;
+    private final Integer limit;
+    private final Long total;
+    private final Integer page;
+    private final Integer pages;
+    private final Long offset;
 
+    /**
+     * Constructs and returns a {@link Pagination} instance from a Spring {@link Page}
+     *
+     * @param page {@link Page} instance
+     * @return {@link Pagination} instance constructed from a Spring {@link Page}
+     */
     public static Pagination fromPage(Page<?> page) {
-        Pagination pagination = new Pagination();
-        pagination.setSize(page.getSize());
-        pagination.setLimit(page.getSize());
-        pagination.setTotal(page.getTotalElements());
-        pagination.setPage(page.getNumber() + 1);
-        pagination.setPages(page.getTotalPages());
-        pagination.setOffset(page.getPageable().isPaged() ? page.getPageable().getOffset() : 0);
-        return pagination;
+        requireNonNull(page, "page can't be null");
+
+        return new Pagination(
+                page.getSize(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getNumber() + 1,
+                page.getTotalPages(),
+                page.getPageable().isPaged() ? page.getPageable().getOffset() : 0
+        );
     }
 }
