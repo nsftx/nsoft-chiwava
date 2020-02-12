@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.core.commons.unit.regex;
+package com.nsoft.chiwava.core.commons.regex;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.nsoft.chiwava.core.commons.regex.Patterns;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

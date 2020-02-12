@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.core.commons.unit.time;
+package com.nsoft.chiwava.core.commons.time;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.nsoft.chiwava.core.commons.time.DateTimeFormats;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.core.commons.unit;
+package com.nsoft.chiwava.core.commons;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.nsoft.chiwava.core.commons.Identities;
 import org.junit.jupiter.api.Test;
 
 public class IdentitiesTest {
