@@ -16,6 +16,8 @@
 
 package com.nsoft.chiwava.core.commons.json;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -36,7 +38,7 @@ import java.util.Set;
  * A wrapper for Jackson's Object Mapper meant to provide simple JSON serialization/deserialization
  * capabilities. If more advance features are required, invoking {@link #complex()} will return a
  * raw Jackson {@link ObjectMapper} with full functionality.
- *
+ * <p>
  * Examples:
  * <pre>
  *     final JsonMapper jsonMapper = new JsonMapper();
@@ -47,8 +49,8 @@ import java.util.Set;
  *     &#64;AllArgsConstructor
  *     &#64;Getter
  *     public class Point {
- *         private int x;
- *         private int y;
+ *         private final int x;
+ *         private final int y;
  *     }
  *
  *     String pointToJson = jsonMapper.toJson(new Point(1, 1));
@@ -72,28 +74,70 @@ public final class JsonMapper {
     }
 
     /**
-     * Converts the input object into a JSON String
+     * Converts an input object into a JSON String and returns the result.
      *
-     * @param object input object
-     * @return object converted to JSON String
+     * @param object input object to serialize to a JSON String
+     * @return a JSON String representation of the input object
      */
     public String toJson(Object object) {
+        return toJson0(object, false);
+    }
+
+    /**
+     * Converts an input object into a JSON String and returns the result.
+     *
+     * @param object input object to serialize to a JSON String
+     * @param pretty if {@code true} a formatted JSON String will be returned, otherwise the String
+     * will be compressed
+     * @return a JSON String representation of the input object
+     */
+    public String toJson(Object object, boolean pretty) {
+        return toJson0(object, pretty);
+    }
+
+    private String toJson0(Object object, boolean pretty) {
         try {
-            return objectMapper.writeValueAsString(object);
+            return pretty
+                    ? objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object)
+                    : objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new JsonMapperException("An error occurred during serialization", e);
         }
     }
 
     /**
-     * Generates an object instance from input JSON String
+     * Converts a JSON String into a Java Object if the JSON String can be mapped to the provided
+     * {@link Class}. Otherwise a {@link com.fasterxml.jackson.databind.JsonMappingException} is
+     * thrown
      *
-     * @param json input JSON String
-     * @param clazz runtime class wrapper
+     * @param json input JSON String to convert
+     * @param clazz class used as a mapping reference
      * @param <T> type to map
-     * @return object instance generated from JSON String
+     * @return object instance mapped from a JSON String
      */
     public <T> T fromJson(String json, Class<T> clazz) {
+        requireNonNull(json, "json input can't be null");
+
+        return fromJson0(json, clazz);
+    }
+
+    /**
+     * Converts a JSON String into a Java Object if the JSON String can be mapped to the provided
+     * {@link TypeReference}. Otherwise a {@link com.fasterxml.jackson.databind.JsonMappingException}
+     * is thrown
+     *
+     * @param json input JSON String to convert
+     * @param typeReference type used as a mapping reference
+     * @param <T> type to map
+     * @return object instance mapped from a JSON String
+     */
+    public <T> T fromJson(String json, TypeReference<T> typeReference) {
+        requireNonNull(json, "json input can't be null");
+
+        return fromJson0(json, typeReference);
+    }
+
+    private <T> T fromJson0(String json, Class<T> clazz) {
         T obj;
         try {
             obj = objectMapper.readValue(json, clazz);
@@ -103,15 +147,7 @@ public final class JsonMapper {
         return obj;
     }
 
-    /**
-     * Generates an object instance from input JSON String
-     *
-     * @param json input JSON String
-     * @param typeReference type reference
-     * @param <T> type to map
-     * @return object instance generated from JSON String
-     */
-    public <T> T fromJson(String json, TypeReference<T> typeReference) {
+    private <T> T fromJson0(String json, TypeReference<T> typeReference) {
         T obj;
         try {
             obj = objectMapper.readValue(json, typeReference);
