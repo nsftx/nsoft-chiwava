@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class IdentitiesTest {
+final class IdentitiesTest {
 
     @Test
-    public void shouldGenerateUniqueId() {
+    void shouldGenerateUniqueId() {
         String first = Identities.generateUniqueId();
         String second = Identities.generateUniqueId();
 
@@ -34,7 +34,7 @@ public class IdentitiesTest {
     }
 
     @Test
-    public void shouldGenerateStrippedUniqueId() {
+    void shouldGenerateStrippedUniqueId() {
         String first = Identities.generateUniqueIdStripped();
         String second = Identities.generateUniqueIdStripped();
 
@@ -42,7 +42,7 @@ public class IdentitiesTest {
     }
 
     @Test
-    public void shouldReconstructStrippedUniqueId() {
+    void shouldReconstructStrippedUniqueId() {
         String validUUID = Identities.generateUniqueId();
         String reconstructedUUID = Identities.reconstructStrippedUUID(validUUID);
         assertTrue(Identities.isUUID(reconstructedUUID));
@@ -53,19 +53,19 @@ public class IdentitiesTest {
     }
 
     @Test
-    public void shouldNotReconstructStrippedUniqueId_InvalidLength() {
+    void shouldNotReconstructStrippedUniqueId_InvalidLength() {
         assertThrows(IllegalArgumentException.class,
                 () -> Identities.reconstructStrippedUUID("Invalid input"));
     }
 
     @Test
-    public void shouldNotReconstructStrippedUniqueId_InvalidCharacter() {
+    void shouldNotReconstructStrippedUniqueId_InvalidCharacter() {
         assertThrows(IllegalArgumentException.class,
                 () -> Identities.reconstructStrippedUUID("8a9574606dea4c39a732e48d05.26a05"));
     }
 
     @Test
-    public void shouldReconstructDamagedUniqueId() {
+    void shouldReconstructDamagedUniqueId() {
         String validUUID = "b6911c1a-7369-4a66-9e9e-b880ae6be365";
         String reconstructedUUID = Identities.reconstructDamagedUUID(validUUID);
         assertTrue(Identities.isUUID(reconstructedUUID));
@@ -108,26 +108,26 @@ public class IdentitiesTest {
     }
 
     @Test
-    public void shouldNotReconstructDamagedUUID_InvalidLength() {
+    void shouldNotReconstructDamagedUUID_InvalidLength() {
         String damagedUUID = "b6911c1a73694a669e9b880ae6be365";
         assertThrows(IllegalArgumentException.class,
                 () -> Identities.reconstructDamagedUUID(damagedUUID));
     }
 
     @Test
-    public void shouldNotReconstructDamagedUUID_InvalidCharacter() {
+    void shouldNotReconstructDamagedUUID_InvalidCharacter() {
         String damagedUUID = "b6911c1a73694a669e9b880ae6b.e365";
         assertThrows(IllegalArgumentException.class,
                 () -> Identities.reconstructDamagedUUID(damagedUUID));
     }
 
     @Test
-    public void shouldBeUniqueId() {
+    void shouldBeUniqueId() {
         assertTrue(Identities.isUUID(Identities.generateUniqueId()));
     }
 
     @Test
-    public void shouldNotBeUniqueId() {
+    void shouldNotBeUniqueId() {
         assertFalse(Identities.isUUID("Invalid UUID"));
     }
 

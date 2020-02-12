@@ -23,27 +23,27 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-public class PatternsTest {
+final class PatternsTest {
 
     @Test
-    public void shouldMatchUUID() {
+    void shouldMatchUUID() {
         assertTrue(Patterns.isUUID(UUID.randomUUID().toString()));
     }
 
     @Test
-    public void shouldNotMatchUUID() {
+    void shouldNotMatchUUID() {
         assertFalse(Patterns.isUUID("Random blob of text"));
     }
 
     @Test
-    public void shouldMatchEmail() {
+    void shouldMatchEmail() {
         final String email = "example@example.com";
 
         assertTrue(Patterns.isEmail(email));
     }
 
     @Test
-    public void shouldNotMatchEmail() {
+    void shouldNotMatchEmail() {
         assertFalse(Patterns.isEmail("Random blob of text"));
     }
 }

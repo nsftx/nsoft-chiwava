@@ -22,17 +22,17 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-public class DateTimeFormatsTest {
+final class DateTimeFormatsTest {
 
     @Test
-    public void shouldFormatDefaultUTC() {
+    void shouldFormatDefaultUTC() {
         LocalDateTime localDateTime = LocalDateTime.now();
 
         assertNotNull(localDateTime.format(DateTimeFormats.UTC_DEFAULT));
     }
 
     @Test
-    public void shouldFormatExtendedUTC() {
+    void shouldFormatExtendedUTC() {
         LocalDateTime localDateTime = LocalDateTime.now();
 
         assertNotNull(localDateTime.format(DateTimeFormats.UTC_ZULU));
