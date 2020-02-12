@@ -184,7 +184,7 @@
                                     <version>[3.6.0,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>[1.8,1.9)</version>
+                                    <version>[1.8,)</version>
                                 </requireJavaVersion>
                                 <banDuplicatePomDependencyVersions/>
                             </rules>
