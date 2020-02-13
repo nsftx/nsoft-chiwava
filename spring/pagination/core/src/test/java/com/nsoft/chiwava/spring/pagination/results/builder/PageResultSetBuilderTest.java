@@ -14,34 +14,37 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.spring.pagination;
+package com.nsoft.chiwava.spring.pagination.results.builder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.nsoft.chiwava.spring.pagination.results.ResultSet;
 import com.nsoft.chiwava.support.MockSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 
-final class PaginationTest {
+final class PageResultSetBuilderTest {
 
     @Test
-    void fromPage() {
+    void build() {
         final int pageSize = 10;
         final long totalElements = 100;
-        final int totalPages = (int) (totalElements / pageSize);
 
-        final Page<?> page = MockSupport.mockPage(pageSize, totalElements);
+        final Page<Object> page = MockSupport.mockPage(pageSize, totalElements);
 
-        final Pagination pagination = Pagination.fromPage(page);
+        PageResultSetBuilder<Object, String> resultSetBuilder = new PageResultSetBuilder<Object, String>() {
+            @Override
+            public String buildSingle(Object input) {
+                if (input instanceof String) {
+                    return (String) input;
+                }
+                return null;
+            }
+        };
 
-        assertNotNull(pagination);
-        assertEquals(pageSize, pagination.getSize());
-        assertEquals(pageSize, pagination.getLimit());
-        assertEquals(totalElements, page.getTotalElements());
-        assertEquals(totalPages, pagination.getPages());
-        assertFalse(pagination.getPage() > pagination.getPages());
-        assertEquals(page.getSize() * page.getNumber(), pagination.getOffset());
+        ResultSet<String> resultSet = resultSetBuilder.build(page);
+
+        assertNotNull(resultSet.getData());
+        assertNotNull(resultSet.getPagination());
     }
 }
