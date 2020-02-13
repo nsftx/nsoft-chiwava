@@ -10,7 +10,7 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
     ...
     <dependency>
         <groupId>com.nsoft.chiwava</groupId>
-        <artifactId>chiwava-core-commons</artifactId>
+        <artifactId>${chiwava-module-name}</artifactId>
         <version>2.0.0.RC3</version>
     </dependency>
     ...
@@ -21,7 +21,7 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
 ```groovy
 dependencies {
     ...
-    compile group: "com.nsoft.chiwava", name: "chiwava-core-commons", version: "2.0.0.RC3"
+    compile group: "com.nsoft.chiwava", name: "${chiwava-module-name}", version: "2.0.0.RC3"
     ...
 }
 ```
