@@ -1,0 +1,4 @@
+rootProject.name = 'chiwava-examples'
+
+include 'chiwava-core-commons-json'
+project(':chiwava-core-commons-json').projectDir = file('chiwava-core-commons-json')

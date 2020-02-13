@@ -42,6 +42,9 @@ spring/pagination/core/target/
 spring/pagination/resolver/build/
 spring/pagination/resolver/target/
 
+# Gradle
+/examples/.gradle
+
 ### STS ###
 .apt_generated
 .classpath
