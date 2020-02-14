@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ import lombok.Getter;
  * @since 2019-06-09
  */
 @AllArgsConstructor
-public class Candidate {
+public final class Candidate {
     @Getter
-    private String database;
+    private final String database;
     @Getter
-    private String table;
+    private final String table;
     @Getter
-    private OperationType operation;
+    private final OperationType operation;
 }

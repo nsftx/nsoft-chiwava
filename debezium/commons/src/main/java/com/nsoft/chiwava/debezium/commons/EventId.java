@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@ import lombok.Getter;
  * @author Mislav Milicevic
  * @since 2019-06-09
  */
-public class EventId {
+public final class EventId {
     @Getter
-    private Object id;
+    private final Object id;
 
     @JsonCreator
     public EventId(@JsonProperty("version_id") Object id) {

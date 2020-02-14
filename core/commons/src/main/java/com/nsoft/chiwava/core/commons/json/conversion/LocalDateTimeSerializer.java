@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
     public void setFormat(String format) {
         dateTimeFormatter = DateTimeFormatter
-                .ofPattern(Objects.requireNonNull(format, "Format can't be null"));
+                .ofPattern(Objects.requireNonNull(format, "format can't be null"));
     }
 
     public void setFormat(DateTimeFormatter dateTimeFormatter) {

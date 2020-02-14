@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public final class Identities {
      * @return reconstructed UUID
      */
     public static String reconstructStrippedUUID(String input) {
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         if (isUUID(input)) {
             return input;
@@ -75,7 +75,7 @@ public final class Identities {
         }
 
         for (char c : input.toCharArray()) {
-            if (!Characters.isAlphanumeric(c)) {
+            if (isNotCharacterAlphanumeric(c)) {
                 throw new IllegalArgumentException(
                         String.format("Illegal character {found: %s}", c));
             }
@@ -101,7 +101,7 @@ public final class Identities {
      * @return reconstructed UUID
      */
     public static String reconstructDamagedUUID(String input) {
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         if (isUUID(input)) {
             return input;
@@ -116,7 +116,7 @@ public final class Identities {
         int hyphenCount = 0;
 
         for (char c : input.toCharArray()) {
-            if (!Characters.isAlphanumeric(c)) {
+            if (isNotCharacterAlphanumeric(c)) {
                 if (c == '-') {
                     if (hyphenCount > 4) {
                         throw new IllegalArgumentException("Too many hyphens");
@@ -187,6 +187,10 @@ public final class Identities {
      */
     public static boolean isUUID(String input) {
         return Patterns.isUUID(input);
+    }
+
+    private static boolean isNotCharacterAlphanumeric(char c) {
+        return (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9');
     }
 
 }

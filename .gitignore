@@ -25,18 +25,25 @@ hs_err_pid*
 
 # Maven
 /target
+core/target
 core/commons/build/
 core/commons/target/
 core/error/build/
 core/error/target/
 core/persistence/build/
 core/persistence/target/
+debezium/target
 debezium/commons/build/
 debezium/commons/target/
+spring/target
+spring/pagination/target
 spring/pagination/core/build/
 spring/pagination/core/target/
 spring/pagination/resolver/build/
 spring/pagination/resolver/target/
+
+# Gradle
+/examples/.gradle
 
 ### STS ###
 .apt_generated

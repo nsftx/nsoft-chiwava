@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 
 package com.nsoft.chiwava.spring.pagination.resolver;
 
+import static java.lang.Integer.parseInt;
+import static java.util.Objects.requireNonNull;
+
 import com.nsoft.chiwava.spring.pagination.resolver.exception.InvalidPaginationParametersException;
+import com.nsoft.chiwava.spring.pagination.resolver.request.NormalizedPageRequest;
 import com.nsoft.chiwava.spring.pagination.resolver.request.OffsetLimitPageRequest;
 import org.springframework.core.MethodParameter;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -30,11 +33,10 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
- * Used to resolve pagination arguments in http requests
+ * Used to resolve pagination arguments in HTTP requests
  *
  * <pre>
  *     public class SpringFoxConfig extends WebMvcConfigurationSupport {
@@ -49,24 +51,22 @@ import java.util.Set;
  *         ...
  *     }
  * </pre>
+ *
+ * @author Nikola Rakic
+ * @author Mislav Milicevic
+ * @since 2019-09-06
  */
 public class ExtendedPageableHandlerMethodArgumentResolver extends
         PageableHandlerMethodArgumentResolver {
 
     private static final int DEFAULT_SIZE = 10;
-    private static final int DEFAULT_PAGE = 0;
+    private static final int DEFAULT_PAGE = 1;
 
-    private static final String LIMIT_PARAMETER = "limit";
-    private static final String OFFSET_PARAMETER = "offset";
-    private static final String PAGE_PARAMETER = "page";
-    private static final String SIZE_PARAMETER = "size";
-    private static final String SORT_PARAMETER = "sort";
-
-    private Integer limit;
-    private Integer offset;
-    private Integer page;
-    private Integer size;
-    private JpaSort sort;
+    static final String LIMIT_PARAMETER = "limit";
+    static final String OFFSET_PARAMETER = "offset";
+    static final String PAGE_PARAMETER = "page";
+    static final String SIZE_PARAMETER = "size";
+    static final String SORT_PARAMETER = "sort";
 
     @Override
     public Pageable resolveArgument(
@@ -74,67 +74,77 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
             ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
             WebDataBinderFactory binderFactory) {
-        parsePageableParameters(webRequest);
+        PageableParameters pageableParameters = parsePageableParameters(webRequest);
 
-        if (hasMixedStrategies()) {
+        if (pageableParameters.hasMixedStrategies()) {
             throw new InvalidPaginationParametersException(
                     "Choose one strategy: page/size or offset/limit");
         }
 
-        if (hasUnpairedLimitAndOffset()) {
+        if (pageableParameters.hasUnpairedLimitAndOffset()) {
             throw new InvalidPaginationParametersException(
                     "Both limit and offset parameters must be provided");
         }
 
-        if (hasUnpairedPageAndSize()) {
+        if (pageableParameters.hasUnpairedPageAndSize()) {
             throw new InvalidPaginationParametersException(
                     "Both page and size parameters must be provided");
         }
 
-        if (hasOnlyLimitAndOffset()) {
-            return OffsetLimitPageRequest.of(offset, limit, sort != null ? sort : Sort.unsorted());
+        if (pageableParameters.hasOnlyLimitAndOffset()) {
+            return OffsetLimitPageRequest.of(
+                    pageableParameters.getOffset(),
+                    pageableParameters.getLimit(),
+                    pageableParameters.getSort() != null
+                            ? pageableParameters.getSort()
+                            : Sort.unsorted());
         }
 
-        if (hasOnlyPageAndSize()) {
-            return PageRequest.of(page, size, sort != null ? sort : Sort.unsorted());
+        if (pageableParameters.hasOnlyPageAndSize()) {
+            return NormalizedPageRequest.of(
+                    pageableParameters.getPage(),
+                    pageableParameters.getSize(),
+                    pageableParameters.getSort() != null
+                            ? pageableParameters.getSort()
+                            : Sort.unsorted());
         }
 
-        return PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE, sort != null ? sort : Sort.unsorted());
+        return NormalizedPageRequest.of(
+                DEFAULT_PAGE,
+                DEFAULT_SIZE,
+                pageableParameters.getSort() != null
+                        ? pageableParameters.getSort()
+                        : Sort.unsorted());
     }
 
-    private void parsePageableParameters(NativeWebRequest request) {
-        limit = null;
-        offset = null;
-        page = null;
-        size = null;
-        sort = null;
+    private PageableParameters parsePageableParameters(NativeWebRequest request) {
+        Integer limit = null;
+        Integer offset = null;
+        Integer page = null;
+        Integer size = null;
+        JpaSort sort = null;
 
-        if (request.getParameter(LIMIT_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)).isBlank()) {
-            limit = Integer.parseInt(Objects.requireNonNull(request.getParameter(LIMIT_PARAMETER)));
+        if (parameterExists(request, LIMIT_PARAMETER)) {
+            limit = parseInt(requireNonNull(request.getParameter(LIMIT_PARAMETER)));
         }
 
-        if (request.getParameter(OFFSET_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)).isBlank()) {
-            offset = Integer
-                    .parseInt(Objects.requireNonNull(request.getParameter(OFFSET_PARAMETER)));
+        if (parameterExists(request, OFFSET_PARAMETER)) {
+            offset = parseInt(requireNonNull(request.getParameter(OFFSET_PARAMETER)));
         }
 
-        if (request.getParameter(PAGE_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)).isBlank()) {
-            page = Integer.parseInt(Objects.requireNonNull(request.getParameter(PAGE_PARAMETER)))
-                    - 1;
+        if (parameterExists(request, PAGE_PARAMETER)) {
+            page = parseInt(requireNonNull(request.getParameter(PAGE_PARAMETER)));
         }
 
-        if (request.getParameter(SIZE_PARAMETER) != null
-                && !Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)).isBlank()) {
-            size = Integer.parseInt(Objects.requireNonNull(request.getParameter(SIZE_PARAMETER)));
+        if (parameterExists(request, SIZE_PARAMETER)) {
+            size = parseInt(requireNonNull(request.getParameter(SIZE_PARAMETER)));
         }
 
-        if (request.getParameterValues(SORT_PARAMETER) != null && !isPropertiesArrayBlank(
-                request.getParameterValues(SORT_PARAMETER))) {
+        if (parameterExists(request, SORT_PARAMETER)) {
             sort = buildSort(request.getParameterValues(SORT_PARAMETER));
         }
+
+        return new PageableParameters(limit, offset, page, size, sort);
     }
 
     private JpaSort buildSort(String[] properties) {
@@ -143,7 +153,7 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
 
         JpaSort jpaSort = null;
 
-        for (String property : Objects.requireNonNull(properties)) {
+        for (String property : requireNonNull(properties)) {
             property = property.trim();
 
             Sort.Direction direction =
@@ -176,46 +186,9 @@ public class ExtendedPageableHandlerMethodArgumentResolver extends
         return jpaSort;
     }
 
-    private boolean hasLimitAndOffset() {
-        return limit != null && offset != null;
-    }
+    private boolean parameterExists(NativeWebRequest request, String parameterName) {
+        final String parameter = request.getParameter(parameterName);
 
-    private boolean hasPageAndSize() {
-        return page != null && size != null;
-    }
-
-    private boolean hasLimitOrOffset() {
-        return limit != null || offset != null;
-    }
-
-    private boolean hasPageOrSize() {
-        return page != null || size != null;
-    }
-
-    private boolean hasOnlyLimitAndOffset() {
-        return hasLimitAndOffset() && !hasPageOrSize();
-    }
-
-    private boolean hasOnlyPageAndSize() {
-        return !hasLimitOrOffset() && hasPageAndSize();
-    }
-
-    private boolean hasUnpairedLimitAndOffset() {
-        return limit != null ^ offset != null;
-    }
-
-    private boolean hasUnpairedPageAndSize() {
-        return page != null ^ size != null;
-    }
-
-    private boolean hasMixedStrategies() {
-        return hasLimitOrOffset() && hasPageOrSize();
-    }
-
-    private boolean isPropertiesArrayBlank(String[] properties) {
-        if (properties == null) {
-            return true;
-        }
-        return properties.length == 1 && properties[0].isBlank();
+        return parameter != null && !parameter.isEmpty();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,8 @@ public class Patterns {
     }
 
     private static boolean matchesPattern(Pattern pattern, CharSequence input) {
-        Objects.requireNonNull(pattern, "Pattern can't be null");
-        Objects.requireNonNull(input, "Input can't be null");
+        Objects.requireNonNull(pattern, "pattern can't be null");
+        Objects.requireNonNull(input, "input can't be null");
 
         return pattern.matcher(input).matches();
     }

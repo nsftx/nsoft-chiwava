@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.Optional;
  * @since 2019-06-09
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DebeziumEvent {
+public final class DebeziumEvent {
 
     private static final JsonMapper JSON_MAPPER;
 
@@ -55,23 +55,23 @@ public class DebeziumEvent {
     private EventId eventId;
 
     @Getter
-    private Map<String, Object> before;
+    private final Map<String, Object> before;
     @Getter
-    private Map<String, Object> after;
+    private final Map<String, Object> after;
     @Getter
-    private Source source;
+    private final Source source;
 
     @JsonProperty("op")
     @Getter
-    private OperationType operation;
+    private final OperationType operation;
 
     @JsonProperty("ts_ms")
     @Getter
-    private Long timestampMilliseconds;
+    private final Long timestampMilliseconds;
 
     @Getter
     @JsonIgnore
-    private Candidate candidate;
+    private final Candidate candidate;
 
     @JsonCreator
     public DebeziumEvent(@JsonProperty("before") Map<String, Object> before,
@@ -91,6 +91,7 @@ public class DebeziumEvent {
     /**
      * Constructs the after state of the event
      *
+     * @param <T> event model
      * @param clazz model class
      * @return constructed after state
      */
@@ -105,6 +106,7 @@ public class DebeziumEvent {
     /**
      * Constructs the before state of the event
      *
+     * @param <T> event model
      * @param clazz model class
      * @return constructed before state
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 NSoft
+ * Copyright 2019-2020 NSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,10 @@ import com.nsoft.chiwava.core.error.AbstractError;
 import com.nsoft.chiwava.core.error.Title;
 import org.zalando.problem.Status;
 
+/**
+ * @author Mislav Milicevic
+ * @since 2019-09-06
+ */
 public class InvalidPaginationParametersException extends AbstractError {
 
     private static final Title EXCEPTION_TITLE = new Title() {

@@ -1,0 +1,3 @@
+dependencies {
+    compile group: "com.nsoft.chiwava", name: "chiwava-core-commons", version: "${chiwavaVersion}"
+}
