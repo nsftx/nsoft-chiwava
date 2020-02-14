@@ -11,7 +11,7 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
     <dependency>
         <groupId>com.nsoft.chiwava</groupId>
         <artifactId>${chiwava-module-name}</artifactId>
-        <version>2.0.0.RC3</version>
+        <version>2.0.0.RELEASE</version>
     </dependency>
     ...
 </dependencies>
@@ -21,18 +21,18 @@ CHIWAVA is a set of libraries used to reduce the amount of boilerplate code used
 ```groovy
 dependencies {
     ...
-    compile group: "com.nsoft.chiwava", name: "${chiwava-module-name}", version: "2.0.0.RC3"
+    compile group: "com.nsoft.chiwava", name: "${chiwava-module-name}", version: "2.0.0.RELEASE"
     ...
 }
 ```
 
 ### Available modules
-- chiwava-core-commons:2.0.0.RC3
-- chiwava-core-error:2.0.0.RC3
-- chiwava-core-persistence:2.0.0.RC3
-- chiwava-debezium-commons:2.0.0.RC3
-- chiwava-spring-pagination-core:2.0.0.RC3
-- chiwava-spring-pagination-resolver:2.0.0.RC3
+- chiwava-core-commons:2.0.0.RELEASE
+- chiwava-core-error:2.0.0.RELEASE
+- chiwava-core-persistence:2.0.0.RELEASE
+- chiwava-debezium-commons:2.0.0.RELEASE
+- chiwava-spring-pagination-core:2.0.0.RELEASE
+- chiwava-spring-pagination-resolver:2.0.0.RELEASE
 
 ## License
 This project is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0)
