@@ -28,40 +28,40 @@ import lombok.Getter;
  * @since 2019-06-09
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Source {
+public final class Source {
     @Getter
-    private String version;
+    private final String version;
 
     @Getter
-    private String name;
+    private final String name;
 
     @JsonProperty("server_id")
     @Getter
-    private Long serverId;
+    private final Long serverId;
 
     @JsonProperty("ts_sec")
     @Getter
-    private Long timestampSeconds;
+    private final Long timestampSeconds;
 
     @Getter
-    private String gtid;
+    private final String gtid;
     @Getter
-    private String file;
+    private final String file;
 
     @JsonProperty("pos")
     @Getter
-    private Long position;
+    private final Long position;
 
     @Getter
-    private Integer row;
+    private final Integer row;
     @Getter
-    private Object snapshot;
+    private final Object snapshot;
     @Getter
-    private Integer thread;
+    private final Integer thread;
     @Getter
-    private String db;
+    private final String db;
     @Getter
-    private String table;
+    private final String table;
 
     @JsonCreator
     public Source(@JsonProperty("version") String version, @JsonProperty("name") String name,

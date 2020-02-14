@@ -26,9 +26,9 @@ import lombok.Getter;
  * @author Mislav Milicevic
  * @since 2019-06-09
  */
-public class EventId {
+public final class EventId {
     @Getter
-    private Object id;
+    private final Object id;
 
     @JsonCreator
     public EventId(@JsonProperty("version_id") Object id) {

@@ -26,11 +26,11 @@ import lombok.Getter;
  * @since 2019-06-09
  */
 @AllArgsConstructor
-public class Candidate {
+public final class Candidate {
     @Getter
-    private String database;
+    private final String database;
     @Getter
-    private String table;
+    private final String table;
     @Getter
-    private OperationType operation;
+    private final OperationType operation;
 }
