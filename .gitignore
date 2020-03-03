@@ -41,6 +41,7 @@ spring/pagination/core/build/
 spring/pagination/core/target/
 spring/pagination/resolver/build/
 spring/pagination/resolver/target/
+*.versionsBackup
 
 # Gradle
 /examples/.gradle
