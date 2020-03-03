@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.debezium.commons;
+package com.nsoft.chiwava.debezium.commons.mysql;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,13 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 /**
- * POJO representation of a debezium source object
+ * POJO representation of a mysql debezium source object
  *
  * @author Mislav Milicevic
+ * @author Ivan Vucina
+ *
  * @since 2019-06-09
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class Source {
+public final class MySqlSource {
     @Getter
     private final String version;
 
@@ -64,7 +66,7 @@ public final class Source {
     private final String table;
 
     @JsonCreator
-    public Source(@JsonProperty("version") String version, @JsonProperty("name") String name,
+    public MySqlSource(@JsonProperty("version") String version, @JsonProperty("name") String name,
             @JsonProperty("server_id") Long serverId, @JsonProperty("ts_sec") Long timestampSeconds,
             @JsonProperty("gtid") String gtid, @JsonProperty("file") String file,
             @JsonProperty("pos") Long position, @JsonProperty("row") Integer row,

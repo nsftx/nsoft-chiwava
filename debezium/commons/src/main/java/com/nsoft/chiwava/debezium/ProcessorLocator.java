@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.debezium.commons;
+package com.nsoft.chiwava.debezium;
 
 import com.nsoft.chiwava.debezium.commons.exception.DebeziumEventProcessorNotFoundException;
 
@@ -23,10 +23,15 @@ import com.nsoft.chiwava.debezium.commons.exception.DebeziumEventProcessorNotFou
  *
  * Implementors should be able to locate an event processor based on the incoming event
  *
+ * @param <T> the type of Debezium event
+ * @param <R> the type of Candidate
+ *
  * @author Mislav Milicevic
+ * @author Ivan Vucina
+ *
  * @since 2019-06-09
  */
-public interface ProcessorLocator {
+public interface ProcessorLocator<T, R> {
     /**
      * Should contain logic for event processor discovery
      *
@@ -34,6 +39,6 @@ public interface ProcessorLocator {
      * @return debezium event processor if found
      * @throws DebeziumEventProcessorNotFoundException thrown if processor is not found
      */
-    DebeziumEventProcessor locate(DebeziumEvent event)
+    DebeziumEventProcessor<T, R> locate(T event)
             throws DebeziumEventProcessorNotFoundException;
 }

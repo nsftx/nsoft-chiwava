@@ -22,9 +22,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Enum representation of different event operations
  *
  * @author Mislav Milicevic
+ * @author Ivan Vucina
+ *
  * @since 2019-06-09
  */
 public enum OperationType {
+    @JsonProperty("s") SNAPSHOT,
     @JsonProperty("d") DELETE,
     @JsonProperty("u") UPDATE,
     @JsonProperty("c") CREATE

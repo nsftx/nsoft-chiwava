@@ -1,0 +1,22 @@
+{
+  "before": {
+    "id": 9
+  },
+  "after": null,
+  "source": {
+    "version": "1.1.0.Beta2",
+    "connector": "postgresql",
+    "name": "connector-name",
+    "ts_ms": 1583220771734,
+    "snapshot": "false",
+    "db": "connector-db-name",
+    "schema": "connector-schema-name",
+    "table": "connector-table-name",
+    "txId": 608,
+    "lsn": 24770672,
+    "xmin": null
+  },
+  "op": "d",
+  "ts_ms": 1583220771738,
+  "transaction": null
+}

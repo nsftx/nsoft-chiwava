@@ -1,0 +1,24 @@
+{
+  "before": null,
+  "after": {
+    "id": 3
+  },
+  "source": {
+    "version": "1.1.0.Beta2",
+    "connector": "mysql",
+    "name": "connector-name",
+    "ts_ms": 1578473376000,
+    "snapshot": "false",
+    "db": "connector-db-name",
+    "table": "connector-table-name",
+    "server_id": 190907871,
+    "gtid": "84172118-31f3-11ea-b164-0242ac130009:95",
+    "file": "vt-0000000100-bin.000001",
+    "pos": 46758,
+    "row": 0,
+    "thread": 62,
+    "query": null
+  },
+  "op": "c",
+  "ts_ms": 1578473376292
+}

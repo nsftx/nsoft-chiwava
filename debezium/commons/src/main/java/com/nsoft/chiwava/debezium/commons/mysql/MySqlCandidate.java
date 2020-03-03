@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.debezium.commons;
+package com.nsoft.chiwava.debezium.commons.mysql;
 
+import com.nsoft.chiwava.debezium.commons.OperationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,10 +24,12 @@ import lombok.Getter;
  * Represents a potential candidate for event consumption
  *
  * @author Mislav Milicevic
+ * @author Ivan Vucina
+ *
  * @since 2019-06-09
  */
 @AllArgsConstructor
-public final class Candidate {
+public final class MySqlCandidate {
     @Getter
     private final String database;
     @Getter

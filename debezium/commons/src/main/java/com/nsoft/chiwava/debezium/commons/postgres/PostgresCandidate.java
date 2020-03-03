@@ -14,24 +14,27 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.debezium.commons;
+package com.nsoft.chiwava.debezium.commons.postgres;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nsoft.chiwava.debezium.commons.OperationType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * POJO representation of a Debezium event id
+ * Represents a potential candidate for event consumption
  *
- * @author Mislav Milicevic
- * @since 2019-06-09
+ * @author Ivan Vucina
+ *
+ * @since 2020-03-03
  */
-public final class EventId {
+@AllArgsConstructor
+public final class PostgresCandidate {
     @Getter
-    private final Object id;
-
-    @JsonCreator
-    public EventId(@JsonProperty("version_id") Object id) {
-        this.id = id;
-    }
+    private final String database;
+    @Getter
+    private final String schema;
+    @Getter
+    private final String table;
+    @Getter
+    private final OperationType operation;
 }

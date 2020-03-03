@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nsoft.chiwava.debezium.commons;
+package com.nsoft.chiwava.debezium.commons.mysql;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,8 +24,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.nsoft.chiwava.core.commons.json.JsonMapper;
 import com.nsoft.chiwava.core.commons.json.conversion.LocalDateTimeDeserializer;
 import com.nsoft.chiwava.core.commons.json.conversion.LocalDateTimeSerializer;
+import com.nsoft.chiwava.debezium.commons.OperationType;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -35,10 +35,12 @@ import java.util.Optional;
  * POJO representation of a Debezium event
  *
  * @author Mislav Milicevic
+ * @author Ivan Vucina
+ *
  * @since 2019-06-09
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class DebeziumEvent {
+public final class MySqlDebeziumEvent {
 
     private static final JsonMapper JSON_MAPPER;
 
@@ -50,16 +52,12 @@ public final class DebeziumEvent {
         JSON_MAPPER = new JsonMapper.Builder().withModule(javaTimeModule).build();
     }
 
-    @Setter
-    @Getter
-    private EventId eventId;
-
     @Getter
     private final Map<String, Object> before;
     @Getter
     private final Map<String, Object> after;
     @Getter
-    private final Source source;
+    private final MySqlSource source;
 
     @JsonProperty("op")
     @Getter
@@ -71,11 +69,12 @@ public final class DebeziumEvent {
 
     @Getter
     @JsonIgnore
-    private final Candidate candidate;
+    private final MySqlCandidate candidate;
 
     @JsonCreator
-    public DebeziumEvent(@JsonProperty("before") Map<String, Object> before,
-            @JsonProperty("after") Map<String, Object> after, @JsonProperty("source") Source source,
+    public MySqlDebeziumEvent(@JsonProperty("before") Map<String, Object> before,
+            @JsonProperty("after") Map<String, Object> after,
+            @JsonProperty("source") MySqlSource source,
             @JsonProperty("op") OperationType operation,
             @JsonProperty("ts_ms") Long timestampMilliseconds) {
         this.before = before;
@@ -85,7 +84,8 @@ public final class DebeziumEvent {
         this.timestampMilliseconds = timestampMilliseconds;
 
         this.candidate =
-                new Candidate(this.source.getDb(), this.source.getTable(), this.getOperation());
+                new MySqlCandidate(this.source.getDb(), this.source.getTable(),
+                        this.getOperation());
     }
 
     /**
