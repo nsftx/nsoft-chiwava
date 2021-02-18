@@ -47,7 +47,7 @@
 
         <chiwava.version>${project.version}</chiwava.version>
         <lombok.version>1.18.10</lombok.version>
-        <jackson.version>2.10.1</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
         <spring.version>2.2.3.RELEASE</spring.version>
         <spring.web.version>5.2.3.RELEASE</spring.web.version>
         <zalando.version>0.23.0</zalando.version>
